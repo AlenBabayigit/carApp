@@ -3,9 +3,9 @@ package com.alenbabayigit.carApp.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity                 // Java Persistence API -> Creates a table
-@Table(name = "COLOR")  // Java Persistence API -> Creates a table
-@Data                   // Lombok -> Generates toString(), equals(), hashCode(), getter and setter, and required args constructor methods all combined.
+@Entity  // Java Persistence API -> Creates a table
+@Table(name = "\"COLOR\"", schema = "public", catalog = "car_app") // Java Persistence API -> Creates a table
+@Data  // Lombok -> Generates toString(), equals(), hashCode(), getter and setter, and required args constructor methods all combined.
 /*
 @Getter              // Lombok -> Generates accessor methods.
 @Setter              // Lombok -> Generates mutator methods.
@@ -16,11 +16,11 @@ public class Color {
 
     @Id  // JPA -> Indicates the primary key.
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // JPA -> Automatically generates the primary key.
-    @Column(name = "Color_id")
+    @Column(name = "\"Color_id\"")
     private String id;
 
 
-    @Column(name = "Color_name", nullable = false, unique = true)  // JPA ->
+    @Column(name = "\"Color_name\"", nullable = false, unique = true)  // JPA ->
     private String name;
 
 }
