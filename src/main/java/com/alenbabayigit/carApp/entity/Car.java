@@ -13,7 +13,7 @@ public class Car {
     private String id;
 
     @Column(name = "Car_daily_price")
-    private long dailyPrice;
+    private int dailyPrice;
 
     @Column(name = "Car_model_year")
     private int modelYear;
@@ -22,11 +22,11 @@ public class Car {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "Brand_id")
+    @JoinColumn(name = "Brand_id", nullable = false)
     private Brand brand;
 
     @ManyToOne
-    @JoinColumn(name = "Color_id")
+    @JoinColumn(name = "Color_id", nullable = false)
     private Color color;
 
 

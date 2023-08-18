@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+.main {
+    min-height: 2000px;
+}
+
+header {
+    padding: 15px;
+}
+
+img {
+    display: block;
+    margin: auto;
+    height: 250px;
+    margin-top: 20px;
+    border-radius: 15%
+}
+
+@keyframes mymove-light {
+    from {background-color: #323232; color: whitesmoke}
+    to {background-color: whitesmoke; color:black}
+}
+
+@keyframes mymove-dark {
+    from {background-color: whitesmoke; color: black;}
+    to {background-color: #323232; color: whitesmoke;}
+}
+
+.light-mode {
+    animation: mymove-light 0.8s ease-out;
+    background-color: whitesmoke;
+    color: black;
+}
+
+.dark-mode {
+    animation: mymove-dark 0.8s ease-out;
+    background-color: #323232;
+    color:whitesmoke;
+}
+
+ul {
+    list-style: none;
+}

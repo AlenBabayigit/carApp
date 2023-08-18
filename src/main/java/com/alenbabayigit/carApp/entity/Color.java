@@ -20,7 +20,7 @@ public class Color {
     private String id;
 
 
-    @Column(name = "Color_name", nullable = false)  // JPA ->
+    @Column(name = "Color_name", nullable = false, unique = true)  // JPA ->
     private String name;
 
 }
