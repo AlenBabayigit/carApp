@@ -9,6 +9,6 @@ public interface ColorService {
     Color getColorByID(String colorID);
     List<Color> getAllColors();
     Color updateColor(String colorID, Color updatedColor);
-    void deleteBrandByID(String colorID);
-    void deleteAllBrands();
+    void deleteColorByID(String colorID);
+    void deleteAllColors();
 }

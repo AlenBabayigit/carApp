@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity  // Java Persistence API -> Creates a table
-@Table(name = "\"COLOR\"", schema = "public", catalog = "car_app") // Java Persistence API -> Creates a table
+@Table(name = "`COLOR`", schema = "public", catalog = "car_app") // Java Persistence API -> Creates a table
 @Data  // Lombok -> Generates toString(), equals(), hashCode(), getter and setter, and required args constructor methods all combined.
 /*
 @Getter              // Lombok -> Generates accessor methods.

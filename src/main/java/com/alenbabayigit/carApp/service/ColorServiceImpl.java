@@ -46,12 +46,12 @@ public class ColorServiceImpl implements ColorService {
     }
 
     // Delete Color by ID
-    public void deleteBrandByID(String colorID) {
+    public void deleteColorByID(String colorID) {
         colorRepository.deleteById(colorID);
     }
 
     // Delete All Colors
-    public void deleteAllBrands() {
+    public void deleteAllColors() {
         colorRepository.deleteAll();
     }
 }
