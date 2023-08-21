@@ -5,11 +5,11 @@ import java.util.List;
 public interface BrandService {
   Brand create(Brand brand);
 
-  Brand getById(String brandId);
+  Brand getById(Integer id);
 
   List<Brand> getAll();
 
-  Brand update(String brandId, Brand updatedBrand);
+  Brand update(Integer id, Brand updatedBrand);
 
-  void delete(String brandId);
+  void delete(Integer id);
 }
