@@ -19,7 +19,7 @@ public class BrandServiceImpl implements BrandService {
 
     public Brand getById(Integer id) {
         Optional<Brand> optionalBrand = brandRepository.findById(id);
-        return optionalBrand.isPresent() ? optionalBrand.get() : null;
+        return optionalBrand.orElse(null);
     }
 
     public List<Brand> getAll() {
