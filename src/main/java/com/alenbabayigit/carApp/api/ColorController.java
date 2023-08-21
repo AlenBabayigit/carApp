@@ -1,33 +1,34 @@
-package com.alenbabayigit.carApp.controller;
+package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.entity.Color;
-import com.alenbabayigit.carApp.service.ColorServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import com.alenbabayigit.carApp.color.Color;
+import com.alenbabayigit.carApp.color.ColorServiceImpl;
 import java.util.List;
+
+import com.alenbabayigit.carApp.color.model.request.CreateColorRequest;
+import com.alenbabayigit.carApp.color.model.request.UpdateColorRequest;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/colors")
 public class ColorController {
 
     private final ColorServiceImpl colorService;
-
-    @Autowired
+    
     public ColorController(ColorServiceImpl colorService) {
         this.colorService = colorService;
     }
 
     // Create a new Color
     @PostMapping
-    public Color createColor(@RequestBody Color color) {
-        return colorService.createColor(color);
+    public Color createColor(@RequestBody CreateColorRequest createColorRequest) {
+
+        return colorService.create(createColorRequest);
     }
 
     // Get all Colors
     @GetMapping
     public List<Color> getAllColors() {
-        return colorService.getAllColors();
+        return colorService.getAll();
     }
 
     // Get Color by ID
@@ -37,9 +38,9 @@ public class ColorController {
     }
 
     // Update Color by ID
-    @PutMapping("/{colorID}")
-    public Color updateColor(@PathVariable String colorID, @RequestBody Color updatedColor) {
-        return colorService.updateColor(colorID, updatedColor);
+    @PutMapping("/")
+    public Color updateColor(@RequestParam int colorId, @RequestBody UpdateColorRequest updatedColorRequest) {
+        return colorService.update(colorId, updatedColorRequest);
     }
 
     // Delete all Colors
@@ -52,7 +53,7 @@ public class ColorController {
     // Delete Color by ID
     @DeleteMapping("/{colorID}")
     public void deleteColor(@PathVariable String colorID) {
-        colorService.deleteColorByID(colorID);
+        colorService.deleteById(colorID);
     }
 
 

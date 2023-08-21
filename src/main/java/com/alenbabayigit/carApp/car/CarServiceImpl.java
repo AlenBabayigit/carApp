@@ -1,19 +1,14 @@
-package com.alenbabayigit.carApp.service;
-
-import com.alenbabayigit.carApp.dao.CarRepository;
-import com.alenbabayigit.carApp.entity.Car;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package com.alenbabayigit.carApp.car;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
-
-    @Autowired
+    
     public CarServiceImpl(CarRepository carRepository) {
         this.carRepository = carRepository;
     }

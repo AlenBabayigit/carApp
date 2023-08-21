@@ -1,42 +1,38 @@
-package com.alenbabayigit.carApp.service;
-
-import com.alenbabayigit.carApp.dao.BrandRepository;
-import com.alenbabayigit.carApp.entity.Brand;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package com.alenbabayigit.carApp.brand;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
 @Service
 public class BrandServiceImpl implements BrandService {
 
     private final BrandRepository brandRepository;
 
-    @Autowired
+    
     public BrandServiceImpl(BrandRepository brandRepository) {
         this.brandRepository = brandRepository;
     }
 
     // Create Brand
-    public Brand createBrand(Brand brand) {
+    public Brand create(Brand brand) {
         return brandRepository.save(brand);
     }
 
     // Get Brand by ID
-    public Brand getBrandByID(String brandID) {
-        Optional<Brand> optionalBrand = brandRepository.findById(brandID);
+    public Brand getById(String brandId) {
+        Optional<Brand> optionalBrand = brandRepository.findById(brandId);
         return optionalBrand.isPresent() ? optionalBrand.get() : null;
     }
 
     // Get all Brands
-    public List<Brand> getAllBrands() {
+    public List<Brand> getAll() {
         return brandRepository.findAll();
     }
 
     // Update Brand
-    public Brand updateBrand(String brandID, Brand updatedBrand) {
-        Brand brand = getBrandByID(brandID);
+    public Brand update(String brandId, Brand updatedBrand) {
+        Brand brand = getById(brandId);
         if (brand != null) {
             brand.setId(updatedBrand.getId());
             brand.setName(updatedBrand.getName());
@@ -46,12 +42,9 @@ public class BrandServiceImpl implements BrandService {
     }
 
     // Delete Brand by ID
-    public void deleteBrandByID(String brandID) {
-        brandRepository.deleteById(brandID);
+    public void delete(String brandId) {
+        brandRepository.deleteById(brandId);
     }
 
-    // Delete All Brands
-    public void deleteAllBrands() {
-        brandRepository.deleteAll();
-    }
+
 }

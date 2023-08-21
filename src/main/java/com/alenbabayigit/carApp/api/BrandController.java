@@ -1,19 +1,16 @@
-package com.alenbabayigit.carApp.controller;
+package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.entity.Brand;
-import com.alenbabayigit.carApp.service.BrandServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import com.alenbabayigit.carApp.brand.Brand;
+import com.alenbabayigit.carApp.brand.BrandServiceImpl;
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/brands")
 public class BrandController {
 
     private final BrandServiceImpl brandService;
-
-    @Autowired
+    
     public BrandController(BrandServiceImpl brandService) {
         this.brandService = brandService;
     }
@@ -21,38 +18,33 @@ public class BrandController {
     // Create a new Brand
     @PostMapping
     public Brand createCar(@RequestBody Brand brand) {
-        return brandService.createBrand(brand);
+        return brandService.create(brand);
     }
 
     // Get all Brands
     @GetMapping
     public List<Brand> getAllBrands() {
-        return brandService.getAllBrands();
+        return brandService.getAll();
     }
 
     // Get Brand by ID
     @GetMapping("/{brandID}")
     public Brand getCarById(@PathVariable String brandID) {
-        return brandService.getBrandByID(brandID);
+        return brandService.getById(brandID);
     }
 
     // Update Brand by ID
     @PutMapping("/{brandID}")
     public Brand updateBrand(@PathVariable String brandID, @RequestBody Brand updatedBrand) {
-        return brandService.updateBrand(brandID, updatedBrand);
+        return brandService.update(brandID, updatedBrand);
     }
 
-    // Delete all Brands
-    @DeleteMapping
-    public String deleteAllCars() {
-        brandService.deleteAllBrands();
-        return "All brands have been deleted successfully.";
-    }
+  
 
     // Delete Brand by ID
     @DeleteMapping("/{brandID}")
     public void deleteCar(@PathVariable String brandID) {
-        brandService.deleteBrandByID(brandID);
+        brandService.delete(brandID);
     }
 
 

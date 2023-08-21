@@ -1,11 +1,9 @@
-package com.alenbabayigit.carApp.controller;
+package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.entity.Car;
-import com.alenbabayigit.carApp.service.CarServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import com.alenbabayigit.carApp.car.Car;
+import com.alenbabayigit.carApp.car.CarServiceImpl;
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/cars")
@@ -13,7 +11,7 @@ public class CarController {
 
     private final CarServiceImpl carService;
 
-    @Autowired
+
     public CarController(CarServiceImpl carService) {
         this.carService = carService;
     }

@@ -1,6 +1,5 @@
-package com.alenbabayigit.carApp.service;
+package com.alenbabayigit.carApp.car;
 
-import com.alenbabayigit.carApp.entity.Car;
 
 import java.util.List;
 
