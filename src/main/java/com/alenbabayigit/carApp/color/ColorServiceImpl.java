@@ -29,10 +29,12 @@ public class ColorServiceImpl implements ColorService {
         return optionalColor.orElse(null);
     }
 
+    @Override
     public List<Color> getAll() {
         return colorRepository.findAll();
     }
 
+    @Override
     public Color update(Integer id, UpdateColorRequest updateColorRequest) {
         Color color = getColorById(id);
         color.setName(updateColorRequest.name());
@@ -44,6 +46,7 @@ public class ColorServiceImpl implements ColorService {
         return colorRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no color with following id: " + id));
     }
 
+    @Override
     public void delete(Integer id) {
         getColorById(id);
         colorRepository.deleteById(id);

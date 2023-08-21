@@ -1,10 +1,9 @@
 package com.alenbabayigit.carApp.brand;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.alenbabayigit.carApp.brand.model.request.CreateBrandRequest;
 import com.alenbabayigit.carApp.brand.model.request.UpdateBrandRequest;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,10 +42,10 @@ public class BrandServiceImpl implements BrandService {
 
     private Brand getBrandById(Integer id) {
         return brandRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no brand with following id: " + id));
-  }
+    }
 
-  @Override
-  public void delete(Integer id) {
+    @Override
+    public void delete(Integer id) {
         getBrandById(id);
         brandRepository.deleteById(id);
     }

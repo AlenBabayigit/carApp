@@ -34,8 +34,8 @@ public class ColorController {
     }
 
     @PutMapping("/")
-    public Color update(@RequestParam Integer id, @RequestBody UpdateColorRequest updatedColorRequest) {
-        return colorService.update(id, updatedColorRequest);
+    public Color update(@RequestParam Integer id, @RequestBody UpdateColorRequest updateColorRequest) {
+        return colorService.update(id, updateColorRequest);
     }
 
 
