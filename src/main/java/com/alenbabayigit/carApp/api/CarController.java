@@ -11,45 +11,32 @@ public class CarController {
 
     private final CarServiceImpl carService;
 
-
     public CarController(CarServiceImpl carService) {
         this.carService = carService;
     }
 
-    // Create a new Car
     @PostMapping
-    public Car createCar(@RequestBody Car car) {
-        return carService.createCar(car);
+    public Car create(@RequestBody Car car) {
+        return carService.create(car);
     }
 
-    // Get all Cars
     @GetMapping
-    public List<Car> getAllCars() {
-        return carService.getAllCars();
+    public List<Car> getAll() {
+        return carService.getAll();
     }
 
-    // Get Car by ID
-    @GetMapping("/{carID}")
-    public Car getCarById(@PathVariable String carID) {
-        return carService.getCarByID(carID);
+    @GetMapping("/{id}")
+    public Car getById(@PathVariable Integer id) {
+        return carService.getById(id);
     }
 
-    // Update Car by ID
-    @PutMapping("/{carID}")
-    public Car updateCar(@PathVariable String  carID, @RequestBody Car updatedCar) {
-        return carService.updateCar(carID, updatedCar);
+    @PutMapping("/{id}")
+    public Car update(@PathVariable Integer  id, @RequestBody Car updatedCar) {
+        return carService.update(id, updatedCar);
     }
 
-    // Delete all Cars
-    @DeleteMapping
-    public String deleteAllCars() {
-        carService.deleteAllCars();
-        return "All cars have been deleted successfully.";
-    }
-
-    // Delete Car by ID
-    @DeleteMapping("/{carID}")
-    public void deleteCar(@PathVariable String carID) {
-        carService.deleteCarByID(carID);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        carService.delete(id);
     }
 }

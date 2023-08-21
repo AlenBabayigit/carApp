@@ -18,25 +18,21 @@ public class ColorController {
         this.colorService = colorService;
     }
 
-    // Create a new Color
     @PostMapping
     public Color create(@RequestBody CreateColorRequest createColorRequest) {
         return colorService.create(createColorRequest);
     }
 
-    // Get all Colors
     @GetMapping
     public List<Color> getAll() {
         return colorService.getAll();
     }
 
-    // Get Color by ID
     @GetMapping("/{id}")
     public Color getById(@PathVariable Integer id) {
         return colorService.getById(id);
     }
 
-    // Update Color by ID
     @PutMapping("/")
     public Color update(@RequestParam Integer id, @RequestBody UpdateColorRequest updatedColorRequest) {
         return colorService.update(id, updatedColorRequest);
@@ -45,7 +41,7 @@ public class ColorController {
 
     // Delete Color by ID
     @DeleteMapping("/{id}")
-    public void deleteColor(@PathVariable Integer id) {
+    public void delete(@PathVariable Integer id) {
         colorService.delete(id);
     }
 

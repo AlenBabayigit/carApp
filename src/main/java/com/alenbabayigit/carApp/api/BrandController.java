@@ -15,41 +15,30 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-    // Create a new Brand
     @PostMapping
-    public Brand createCar(@RequestBody Brand brand) {
+    public Brand create(@RequestBody Brand brand) {
         return brandService.create(brand);
     }
 
-    // Get all Brands
     @GetMapping
-    public List<Brand> getAllBrands() {
+    public List<Brand> getAll() {
         return brandService.getAll();
     }
 
-    // Get Brand by ID
-    @GetMapping("/{brandID}")
-    public Brand getCarById(@PathVariable String brandID) {
-        return brandService.getById(brandID);
+    @GetMapping("/{id}")
+    public Brand getById(@PathVariable Integer id) {
+        return brandService.getById(id);
     }
 
-    // Update Brand by ID
-    @PutMapping("/{brandID}")
-    public Brand updateBrand(@PathVariable String brandID, @RequestBody Brand updatedBrand) {
-        return brandService.update(brandID, updatedBrand);
+    @PutMapping("/{id}")
+    public Brand update(@PathVariable Integer id, @RequestBody Brand updatedBrand) {
+        return brandService.update(id, updatedBrand);
     }
 
-  
-
-    // Delete Brand by ID
-    @DeleteMapping("/{brandID}")
-    public void deleteCar(@PathVariable String brandID) {
-        brandService.delete(brandID);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        brandService.delete(id);
     }
-
-
-
-
 
 
 }
