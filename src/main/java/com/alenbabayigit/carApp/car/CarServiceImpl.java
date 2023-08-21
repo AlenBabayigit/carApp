@@ -13,29 +13,25 @@ public class CarServiceImpl implements CarService {
         this.carRepository = carRepository;
     }
 
-    // Create Car
     @Override
     public Car create(Car car) {
         return carRepository.save(car);
     }
 
-    // Get Car by ID
     @Override
-    public Car getCarByID(String carID) {
-        Optional<Car> optionalCar = carRepository.findById(carID);
-        return optionalCar.isPresent() ? optionalCar.get() : null;
+    public Car getById(Integer id) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+        return optionalCar.orElse(null);
     }
 
-    // Get all Cars
     @Override
     public List<Car> getAll() {
         return carRepository.findAll();
     }
 
-    // Update Car
     @Override
-    public Car updateCar(String carID, Car updatedCar) {
-        Car car = getCarByID(carID);
+    public Car update(Integer id, Car updatedCar) {
+        Car car = getById(id);
         if (car != null) {
             car.setId(updatedCar.getId());
             car.setDailyPrice(updatedCar.getDailyPrice());
@@ -48,15 +44,9 @@ public class CarServiceImpl implements CarService {
         return null;
     }
 
-    // Delete Car by ID
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         carRepository.deleteById(id);
     }
 
-    // Delete all Cars
-    @Override
-    public void deleteAllCars() {
-        carRepository.deleteAll();
-    }
 }

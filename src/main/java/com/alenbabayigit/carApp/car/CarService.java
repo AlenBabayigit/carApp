@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface CarService {
     Car create(Car car);
-    Car getByID(Integer id);
+    Car getById(Integer id);
     List<Car> getAll();
-    Car updateCar(Integer id, Car updatedCar);
+    Car update(Integer id, Car updatedCar);
     void delete(Integer id);
 }
