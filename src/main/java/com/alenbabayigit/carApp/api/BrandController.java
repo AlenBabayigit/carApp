@@ -3,6 +3,9 @@ package com.alenbabayigit.carApp.api;
 import com.alenbabayigit.carApp.brand.Brand;
 import com.alenbabayigit.carApp.brand.BrandServiceImpl;
 import java.util.List;
+
+import com.alenbabayigit.carApp.brand.model.request.CreateBrandRequest;
+import com.alenbabayigit.carApp.brand.model.request.UpdateBrandRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,8 +19,8 @@ public class BrandController {
     }
 
     @PostMapping
-    public Brand create(@RequestBody Brand brand) {
-        return brandService.create(brand);
+    public Brand create(@RequestBody CreateBrandRequest createBrandRequest) {
+        return brandService.create(createBrandRequest);
     }
 
     @GetMapping
@@ -31,8 +34,8 @@ public class BrandController {
     }
 
     @PutMapping("/{id}")
-    public Brand update(@PathVariable Integer id, @RequestBody Brand updatedBrand) {
-        return brandService.update(id, updatedBrand);
+    public Brand update(@PathVariable Integer id, @RequestBody UpdateBrandRequest updateBrandRequest) {
+        return brandService.update(id, updateBrandRequest);
     }
 
     @DeleteMapping("/{id}")
