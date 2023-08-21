@@ -16,7 +16,6 @@ public class ColorServiceImpl implements ColorService {
         this.colorRepository = colorRepository;
     }
 
-    // Create Color
     @Override
     public Color create(CreateColorRequest createColorRequest) {
         Color color = new Color();
@@ -24,20 +23,17 @@ public class ColorServiceImpl implements ColorService {
         return colorRepository.save(color);
     }
 
-    // Get Color by ID
     @Override
     public Color getById(Integer colorID) {
         Optional<Color> optionalColor = colorRepository.findById(colorID);
-        return optionalColor.isPresent() ? optionalColor.get() : null;
+        return optionalColor.orElse(null);
     }
 
-    // Get all Colors
     public List<Color> getAll() {
         return colorRepository.findAll();
     }
 
-    // Update Color
-        public Color update(Integer id, UpdateColorRequest updateColorRequest) {
+    public Color update(Integer id, UpdateColorRequest updateColorRequest) {
         Color color = getColorById(id);
         color.setName(updateColorRequest.name());
         return colorRepository.save(color);
@@ -48,11 +44,9 @@ public class ColorServiceImpl implements ColorService {
         return colorRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no color with following id: " + id));
     }
 
-    // Delete Color by ID
     public void delete(Integer id) {
         getColorById(id);
         colorRepository.deleteById(id);
     }
-
 
 }
