@@ -15,7 +15,7 @@ public class CarServiceImpl implements CarService {
 
     // Create Car
     @Override
-    public Car createCar(Car car) {
+    public Car create(Car car) {
         return carRepository.save(car);
     }
 
@@ -28,7 +28,7 @@ public class CarServiceImpl implements CarService {
 
     // Get all Cars
     @Override
-    public List<Car> getAllCars() {
+    public List<Car> getAll() {
         return carRepository.findAll();
     }
 
@@ -50,8 +50,8 @@ public class CarServiceImpl implements CarService {
 
     // Delete Car by ID
     @Override
-    public void deleteCarByID(String carID) {
-        carRepository.deleteById(carID);
+    public void delete(String id) {
+        carRepository.deleteById(id);
     }
 
     // Delete all Cars

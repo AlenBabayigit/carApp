@@ -49,7 +49,7 @@ public class ColorServiceImpl implements ColorService {
     }
 
     // Delete Color by ID
-    public void deleteById(Integer id) {
+    public void delete(Integer id) {
         getColorById(id);
         colorRepository.deleteById(id);
     }

@@ -20,46 +20,34 @@ public class ColorController {
 
     // Create a new Color
     @PostMapping
-    public Color createColor(@RequestBody CreateColorRequest createColorRequest) {
-
+    public Color create(@RequestBody CreateColorRequest createColorRequest) {
         return colorService.create(createColorRequest);
     }
 
     // Get all Colors
     @GetMapping
-    public List<Color> getAllColors() {
+    public List<Color> getAll() {
         return colorService.getAll();
     }
 
     // Get Color by ID
-    @GetMapping("/{colorID}")
-    public Color getColorById(@PathVariable String colorID) {
-        return colorService.getColorByID(colorID);
+    @GetMapping("/{id}")
+    public Color getById(@PathVariable Integer id) {
+        return colorService.getById(id);
     }
 
     // Update Color by ID
     @PutMapping("/")
-    public Color updateColor(@RequestParam int colorId, @RequestBody UpdateColorRequest updatedColorRequest) {
-        return colorService.update(colorId, updatedColorRequest);
+    public Color update(@RequestParam Integer id, @RequestBody UpdateColorRequest updatedColorRequest) {
+        return colorService.update(id, updatedColorRequest);
     }
 
-    // Delete all Colors
-    @DeleteMapping
-    public String deleteAllColors() {
-        colorService.deleteAllColors();
-        return "All colors have been deleted successfully.";
-    }
 
     // Delete Color by ID
-    @DeleteMapping("/{colorID}")
-    public void deleteColor(@PathVariable String colorID) {
-        colorService.deleteById(colorID);
+    @DeleteMapping("/{id}")
+    public void deleteColor(@PathVariable Integer id) {
+        colorService.delete(id);
     }
-
-
-
-
-
 
 
 }

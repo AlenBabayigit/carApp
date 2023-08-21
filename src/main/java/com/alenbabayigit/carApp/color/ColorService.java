@@ -11,5 +11,5 @@ public interface ColorService {
     Color getById(Integer id);
     List<Color> getAll();
     Color update(Integer id, UpdateColorRequest updateColorRequest);
-    void deleteById(Integer id);
+    void delete(Integer id);
 }

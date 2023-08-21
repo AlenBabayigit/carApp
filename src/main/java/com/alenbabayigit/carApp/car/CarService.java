@@ -4,10 +4,9 @@ package com.alenbabayigit.carApp.car;
 import java.util.List;
 
 public interface CarService {
-    Car createCar(Car car);
-    Car getCarByID(String carID);
-    List<Car> getAllCars();
-    Car updateCar(String carID, Car updatedCar);
-    void deleteCarByID(String carID);
-    void deleteAllCars();
+    Car create(Car car);
+    Car getByID(Integer id);
+    List<Car> getAll();
+    Car updateCar(Integer id, Car updatedCar);
+    void delete(Integer id);
 }
