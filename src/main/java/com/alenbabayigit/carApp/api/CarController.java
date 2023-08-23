@@ -3,6 +3,9 @@ package com.alenbabayigit.carApp.api;
 import com.alenbabayigit.carApp.car.Car;
 import com.alenbabayigit.carApp.car.CarServiceImpl;
 import java.util.List;
+
+import com.alenbabayigit.carApp.car.model.request.CreateCarRequest;
+import com.alenbabayigit.carApp.car.model.request.UpdateCarRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,8 +19,8 @@ public class CarController {
     }
 
     @PostMapping
-    public Car create(@RequestBody Car car) {
-        return carService.create(car);
+    public Car create(@RequestBody CreateCarRequest createCarRequest) {
+        return carService.create(createCarRequest);
     }
 
     @GetMapping
@@ -31,8 +34,8 @@ public class CarController {
     }
 
     @PutMapping("/{id}")
-    public Car update(@PathVariable Integer  id, @RequestBody Car updatedCar) {
-        return carService.update(id, updatedCar);
+    public Car update(@PathVariable Integer  id, @RequestBody UpdateCarRequest updateCarRequest) {
+        return carService.update(id, updateCarRequest);
     }
 
     @DeleteMapping("/{id}")

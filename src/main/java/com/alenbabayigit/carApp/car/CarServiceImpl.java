@@ -2,19 +2,34 @@ package com.alenbabayigit.carApp.car;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.alenbabayigit.carApp.brand.BrandServiceImpl;
+import com.alenbabayigit.carApp.car.model.request.CreateCarRequest;
+import com.alenbabayigit.carApp.car.model.request.UpdateCarRequest;
+import com.alenbabayigit.carApp.color.ColorServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
+    private final BrandServiceImpl brandService;
+    private final ColorServiceImpl colorService;
     
-    public CarServiceImpl(CarRepository carRepository) {
+    public CarServiceImpl(CarRepository carRepository, BrandServiceImpl brandService, ColorServiceImpl colorService) {
         this.carRepository = carRepository;
+        this.brandService = brandService;
+        this.colorService = colorService;
     }
 
     @Override
-    public Car create(Car car) {
+    public Car create(CreateCarRequest createCarRequest) {
+        Car car = new Car();
+        car.setDailyPrice(createCarRequest.dailyPrice());
+        car.setModelYear(createCarRequest.modelYear());
+        car.setDescription(createCarRequest.description());
+        car.setBrand(brandService.getById(createCarRequest.brandId()));
+        car.setColor(colorService.getById(createCarRequest.colorId()));
         return carRepository.save(car);
     }
 
@@ -30,22 +45,26 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car update(Integer id, Car updatedCar) {
-        Car car = getById(id);
-        if (car != null) {
-            car.setId(updatedCar.getId());
-            car.setDailyPrice(updatedCar.getDailyPrice());
-            car.setModelYear(updatedCar.getModelYear());
-            car.setDescription(updatedCar.getDescription());
-            car.setBrand(updatedCar.getBrand());
-            car.setColor(updatedCar.getColor());
-            return carRepository.save(car);
-        }
-        return null;
+    public Car update(Integer id, UpdateCarRequest updateCarRequest) {
+        Car car = getCarById(id);
+
+        car.setDailyPrice(updateCarRequest.dailyPrice());
+        car.setModelYear(updateCarRequest.modelYear());
+        car.setDescription(updateCarRequest.description());
+        car.setBrand(brandService.getById(updateCarRequest.brandId()));
+        car.setColor(colorService.getById(updateCarRequest.colorId()));
+
+        return carRepository.save(car);
+
     }
+
+    private Car getCarById(Integer id) {
+    return carRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no car with following id: " + id));
+  }
 
     @Override
     public void delete(Integer id) {
+        getCarById(id);
         carRepository.deleteById(id);
     }
 
