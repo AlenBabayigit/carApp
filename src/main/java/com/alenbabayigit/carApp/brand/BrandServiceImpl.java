@@ -4,6 +4,9 @@ import com.alenbabayigit.carApp.brand.model.request.CreateBrandRequest;
 import com.alenbabayigit.carApp.brand.model.request.UpdateBrandRequest;
 import java.util.List;
 import java.util.Optional;
+
+import com.alenbabayigit.carApp.brand.model.response.BrandGetAllResponse;
+import com.alenbabayigit.carApp.brand.model.response.BrandGetByIdResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,14 +26,15 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand getById(Integer id) {
-        Optional<Brand> optionalBrand = brandRepository.findById(id);
-        return optionalBrand.orElse(null);
+    public BrandGetByIdResponse getById(Integer id) {
+        Brand brand = getBrandById(id);
+        return new BrandGetByIdResponse(brand.getName());
     }
 
     @Override
-    public List<Brand> getAll() {
-        return brandRepository.findAll();
+    public List<BrandGetAllResponse> getAll() {
+        List<BrandGetAllResponse> list = brandRepository.findAll().stream().map(brand -> new BrandGetAllResponse(brand.getId(), brand.getName())).toList();
+        return list;
     }
 
     @Override
