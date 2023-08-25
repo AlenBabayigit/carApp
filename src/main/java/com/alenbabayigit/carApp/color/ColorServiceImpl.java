@@ -1,11 +1,15 @@
 package com.alenbabayigit.carApp.color;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.alenbabayigit.carApp.color.model.request.CreateColorRequest;
 import com.alenbabayigit.carApp.color.model.request.UpdateColorRequest;
+import com.alenbabayigit.carApp.color.model.response.ColorGetAllResponse;
+import com.alenbabayigit.carApp.color.model.response.ColorGetByIdResponse;
+import com.alenbabayigit.carApp.exception.BusinessException;
+import com.alenbabayigit.carApp.util.ResponseBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ColorServiceImpl implements ColorService {
@@ -24,14 +28,15 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public Color getById(Integer colorID) {
-        Optional<Color> optionalColor = colorRepository.findById(colorID);
-        return optionalColor.orElse(null);
+    public ColorGetByIdResponse getById(Integer id) {
+        Color color = getColorById(id);
+        return new ColorGetByIdResponse(color.getName());
     }
 
     @Override
-    public List<Color> getAll() {
-        return colorRepository.findAll();
+    public ResponseEntity<?> getAll() {
+        List<ColorGetAllResponse> list = colorRepository.findAll().stream().map(color -> new ColorGetAllResponse(color.getId(), color.getName())).toList();
+        return ResponseBuilder.success("Data listed successfully", list);
     }
 
     @Override
@@ -42,8 +47,9 @@ public class ColorServiceImpl implements ColorService {
 
     }
 
-    private Color getColorById(Integer id) {
-        return colorRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no color with following id: " + id));
+    @Override
+    public Color getColorById(Integer id) {
+        return colorRepository.findById(id).orElseThrow(() -> new BusinessException("There is no color with following id: " + id));
     }
 
     @Override

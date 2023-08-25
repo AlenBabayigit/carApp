@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.alenbabayigit.carApp.color.model.request.CreateColorRequest;
 import com.alenbabayigit.carApp.color.model.request.UpdateColorRequest;
+import com.alenbabayigit.carApp.color.model.response.ColorGetByIdResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,12 +26,12 @@ public class ColorController {
     }
 
     @GetMapping
-    public List<Color> getAll() {
+    public ResponseEntity<?> getAll() {
         return colorService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Color getById(@PathVariable Integer id) {
+    public ColorGetByIdResponse getById(@PathVariable Integer id) {
         return colorService.getById(id);
     }
 
@@ -38,12 +40,8 @@ public class ColorController {
         return colorService.update(id, updateColorRequest);
     }
 
-
-    // Delete Color by ID
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         colorService.delete(id);
     }
-
-
 }

@@ -47,7 +47,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand getBrandById(Integer id) {
-    return brandRepository.findById(id).orElseThrow(() -> new BusinessException("There is no brand with following id: " + id));
+        return brandRepository.findById(id).orElseThrow(() -> new BusinessException("There is no brand with following id: " + id));
     }
 
     @Override

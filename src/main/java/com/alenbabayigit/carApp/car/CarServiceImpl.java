@@ -7,6 +7,7 @@ import com.alenbabayigit.carApp.brand.BrandServiceImpl;
 import com.alenbabayigit.carApp.car.model.request.CreateCarRequest;
 import com.alenbabayigit.carApp.car.model.request.UpdateCarRequest;
 import com.alenbabayigit.carApp.color.ColorServiceImpl;
+import com.alenbabayigit.carApp.exception.BusinessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,7 +30,7 @@ public class CarServiceImpl implements CarService {
         car.setModelYear(createCarRequest.modelYear());
         car.setDescription(createCarRequest.description());
         car.setBrand(brandService.getBrandById(createCarRequest.brandId()));
-        car.setColor(colorService.getById(createCarRequest.colorId()));
+        car.setColor(colorService.getColorById(createCarRequest.colorId()));
         return carRepository.save(car);
     }
 
@@ -52,14 +53,14 @@ public class CarServiceImpl implements CarService {
         car.setModelYear(updateCarRequest.modelYear());
         car.setDescription(updateCarRequest.description());
         car.setBrand(brandService.getBrandById(updateCarRequest.brandId()));
-        car.setColor(colorService.getById(updateCarRequest.colorId()));
+        car.setColor(colorService.getColorById(updateCarRequest.colorId()));
 
         return carRepository.save(car);
 
     }
 
     private Car getCarById(Integer id) {
-    return carRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no car with following id: " + id));
+        return carRepository.findById(id).orElseThrow(() -> new BusinessException("There is no car with following id: " + id));
   }
 
     @Override
