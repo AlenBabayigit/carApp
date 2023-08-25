@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.alenbabayigit.carApp.brand.model.request.CreateBrandRequest;
 import com.alenbabayigit.carApp.brand.model.request.UpdateBrandRequest;
+import com.alenbabayigit.carApp.brand.model.response.BrandGetByIdResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,12 +26,12 @@ public class BrandController {
     }
 
     @GetMapping
-    public List<Brand> getAll() {
+    public ResponseEntity<?> getAll() {
         return brandService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Brand getById(@PathVariable Integer id) {
+    public BrandGetByIdResponse getById(@PathVariable Integer id) {
         return brandService.getById(id);
     }
 

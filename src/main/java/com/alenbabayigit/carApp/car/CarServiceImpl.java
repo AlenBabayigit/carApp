@@ -28,7 +28,7 @@ public class CarServiceImpl implements CarService {
         car.setDailyPrice(createCarRequest.dailyPrice());
         car.setModelYear(createCarRequest.modelYear());
         car.setDescription(createCarRequest.description());
-        car.setBrand(brandService.getById(createCarRequest.brandId()));
+        car.setBrand(brandService.getBrandById(createCarRequest.brandId()));
         car.setColor(colorService.getById(createCarRequest.colorId()));
         return carRepository.save(car);
     }
@@ -51,7 +51,7 @@ public class CarServiceImpl implements CarService {
         car.setDailyPrice(updateCarRequest.dailyPrice());
         car.setModelYear(updateCarRequest.modelYear());
         car.setDescription(updateCarRequest.description());
-        car.setBrand(brandService.getById(updateCarRequest.brandId()));
+        car.setBrand(brandService.getBrandById(updateCarRequest.brandId()));
         car.setColor(colorService.getById(updateCarRequest.colorId()));
 
         return carRepository.save(car);
