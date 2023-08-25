@@ -1,11 +1,25 @@
 package com.alenbabayigit.carApp.util;
 
-import org.springframework.context.annotation.Configuration;
+import java.util.HashMap;
+import org.springframework.http.ResponseEntity;
 
-@Configuration
 public class ResponseBuilder {
 
-    // public static
+    public static ResponseEntity<?> success(String message, Object data) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("success", true);
+        hashMap.put("message", message);
+        hashMap.put("data", data);
+        return ResponseEntity.ok(hashMap);
 
+    }
+
+    public static ResponseEntity<?> error(String message) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("success", false);
+        hashMap.put("message", message);
+        hashMap.put("data", null);
+        return ResponseEntity.ok(hashMap);
+    }
 
 }
