@@ -10,7 +10,7 @@ public interface BrandService {
 
   BrandGetByIdResponse getById(Integer id);
 
-  ResponseEntity getAll();
+  ResponseEntity<?> getAll();
 
   Brand update(Integer id, UpdateBrandRequest updateBrandRequest);
 

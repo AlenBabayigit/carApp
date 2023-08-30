@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.alenbabayigit.carApp.car.model.request.CreateCarRequest;
 import com.alenbabayigit.carApp.car.model.request.UpdateCarRequest;
+import com.alenbabayigit.carApp.car.model.response.CarGetByIdResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,12 +26,12 @@ public class CarController {
     }
 
     @GetMapping
-    public List<Car> getAll() {
+    public ResponseEntity<?> getAll() {
         return carService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Car getById(@PathVariable Integer id) {
+    public CarGetByIdResponse getById(@PathVariable Integer id) {
         return carService.getById(id);
     }
 

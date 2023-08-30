@@ -4,10 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import com.alenbabayigit.carApp.brand.BrandServiceImpl;
+import com.alenbabayigit.carApp.brand.model.response.BrandGetByIdResponse;
 import com.alenbabayigit.carApp.car.model.request.CreateCarRequest;
 import com.alenbabayigit.carApp.car.model.request.UpdateCarRequest;
+import com.alenbabayigit.carApp.car.model.response.CarGetAllResponse;
+import com.alenbabayigit.carApp.car.model.response.CarGetByIdResponse;
 import com.alenbabayigit.carApp.color.ColorServiceImpl;
+import com.alenbabayigit.carApp.color.model.response.ColorGetByIdResponse;
 import com.alenbabayigit.carApp.exception.BusinessException;
+import com.alenbabayigit.carApp.util.ResponseBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,14 +41,28 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car getById(Integer id) {
-        Optional<Car> optionalCar = carRepository.findById(id);
-        return optionalCar.orElse(null);
+    public CarGetByIdResponse getById(Integer id) {
+        Car car = getCarById(id);
+        return new CarGetByIdResponse(car.getDailyPrice(), car.getModelYear(), car.getDescription(),
+                new BrandGetByIdResponse(car.getBrand().getName()), new ColorGetByIdResponse(car.getColor().getName()));
     }
 
     @Override
-    public List<Car> getAll() {
-        return carRepository.findAll();
+    public ResponseEntity<?> getAll() {
+    List<CarGetAllResponse> list =
+        carRepository.findAll().stream()
+            .map(
+                car ->
+                    new CarGetAllResponse(
+                        car.getId(),
+                        car.getDailyPrice(),
+                        car.getModelYear(),
+                        car.getDescription(),
+                        car.getBrand(),
+                        car.getColor())).toList();
+                        //new BrandGetByIdResponse(car.getBrand().getName()),
+                        //new ColorGetByIdResponse(car.getColor().getName()))).toList();
+        return ResponseBuilder.success("Data listed successfully.", list);
     }
 
     @Override
@@ -59,7 +79,8 @@ public class CarServiceImpl implements CarService {
 
     }
 
-    private Car getCarById(Integer id) {
+    @Override
+    public Car getCarById(Integer id) {
         return carRepository.findById(id).orElseThrow(() -> new BusinessException("There is no car with following id: " + id));
   }
 
