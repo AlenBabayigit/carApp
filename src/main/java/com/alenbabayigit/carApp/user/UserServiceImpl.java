@@ -1,0 +1,59 @@
+package com.alenbabayigit.carApp.user;
+
+import com.alenbabayigit.carApp.exception.BusinessException;
+import com.alenbabayigit.carApp.user.model.request.UpdateUserRequest;
+import com.alenbabayigit.carApp.user.model.response.UserGetAllResponse;
+import com.alenbabayigit.carApp.user.model.response.UserGetByIdResponse;
+import com.alenbabayigit.carApp.util.ResponseBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+
+    @Override
+    public User create(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public UserGetByIdResponse getById(Integer id) {
+        User user = getUserById(id);
+        return new UserGetByIdResponse(user.getEmail(), user.getPassword());
+    }
+
+    @Override
+    public ResponseEntity<?> getAll() {
+        List<UserGetAllResponse> list = userRepository.findAll().stream()
+                .map(user -> new UserGetAllResponse(user.getId(), user.getEmail(), user.getPassword())).toList();
+        return ResponseBuilder.success("Data listed successfully.", list);
+    }
+
+    @Override
+    public User update(Integer id, UpdateUserRequest updateUserRequest) {
+        User user = getUserById(id);
+        user.setEmail(updateUserRequest.email());
+        user.setPassword(updateUserRequest.password());
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        return userRepository.findById(id).orElseThrow(() -> new BusinessException("There is no user with following id: " + id));
+    }
+
+    @Override
+    public void delete(Integer id) {
+        getUserById(id);
+        userRepository.deleteById(id);
+    }
+}
