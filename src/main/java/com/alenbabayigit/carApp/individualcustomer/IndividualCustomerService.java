@@ -1,8 +1,8 @@
-package com.alenbabayigit.carApp.user;
+package com.alenbabayigit.carApp.individualcustomer;
 
-import com.alenbabayigit.carApp.user.model.request.CreateIndividualCustomerRequest;
-import com.alenbabayigit.carApp.user.model.request.UpdateIndividualCustomerRequest;
-import com.alenbabayigit.carApp.user.model.response.IndividualCustomerGetByIdResponse;
+import com.alenbabayigit.carApp.individualcustomer.model.request.CreateIndividualCustomerRequest;
+import com.alenbabayigit.carApp.individualcustomer.model.request.UpdateIndividualCustomerRequest;
+import com.alenbabayigit.carApp.individualcustomer.model.response.IndividualCustomerGetByIdResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface IndividualCustomerService {

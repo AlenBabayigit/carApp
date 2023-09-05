@@ -1,8 +1,5 @@
 package com.alenbabayigit.carApp.car;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.alenbabayigit.carApp.brand.BrandServiceImpl;
 import com.alenbabayigit.carApp.brand.model.response.BrandGetByIdResponse;
 import com.alenbabayigit.carApp.car.model.request.CreateCarRequest;
@@ -13,6 +10,7 @@ import com.alenbabayigit.carApp.color.ColorServiceImpl;
 import com.alenbabayigit.carApp.color.model.response.ColorGetByIdResponse;
 import com.alenbabayigit.carApp.exception.BusinessException;
 import com.alenbabayigit.carApp.util.ResponseBuilder;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -31,19 +29,32 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car create(CreateCarRequest createCarRequest) {
+        checkCarIsAlreadyExists(createCarRequest.plate());
+        Car car = createCarFromRequest(createCarRequest);
+        return carRepository.save(car);
+    }
+
+    private void checkCarIsAlreadyExists(String plate) {
+        boolean isCarExists = carRepository.existsCarByPlateIgnoreCase(plate);
+        if (isCarExists) {
+            throw new BusinessException("Car already exists: " + plate);
+        }
+    }
+
+    private Car createCarFromRequest(CreateCarRequest createCarRequest) {
         Car car = new Car();
         car.setDailyPrice(createCarRequest.dailyPrice());
         car.setModelYear(createCarRequest.modelYear());
-        car.setDescription(createCarRequest.description());
+        car.setPlate(createCarRequest.plate());
         car.setBrand(brandService.getBrandById(createCarRequest.brandId()));
         car.setColor(colorService.getColorById(createCarRequest.colorId()));
-        return carRepository.save(car);
+        return car;
     }
 
     @Override
     public CarGetByIdResponse getById(Integer id) {
         Car car = getCarById(id);
-        return new CarGetByIdResponse(car.getDailyPrice(), car.getModelYear(), car.getDescription(),
+        return new CarGetByIdResponse(car.getDailyPrice(), car.getModelYear(), car.getPlate(),
                 new BrandGetByIdResponse(car.getBrand().getName()), new ColorGetByIdResponse(car.getColor().getName()));
     }
 
@@ -57,26 +68,27 @@ public class CarServiceImpl implements CarService {
                         car.getId(),
                         car.getDailyPrice(),
                         car.getModelYear(),
-                        car.getDescription(),
-                        car.getBrand(),
-                        car.getColor())).toList();
-                        //new BrandGetByIdResponse(car.getBrand().getName()),
-                        //new ColorGetByIdResponse(car.getColor().getName()))).toList();
+                        car.getPlate(),
+                        new BrandGetByIdResponse(car.getBrand().getName()),
+                        new ColorGetByIdResponse(car.getColor().getName()))).toList();
         return ResponseBuilder.success("Data listed successfully.", list);
     }
 
     @Override
     public Car update(Integer id, UpdateCarRequest updateCarRequest) {
+        checkCarIsAlreadyExists(updateCarRequest.plate());
         Car car = getCarById(id);
-
-        car.setDailyPrice(updateCarRequest.dailyPrice());
-        car.setModelYear(updateCarRequest.modelYear());
-        car.setDescription(updateCarRequest.description());
-        car.setBrand(brandService.getBrandById(updateCarRequest.brandId()));
-        car.setColor(colorService.getColorById(updateCarRequest.colorId()));
-
+        updateCarFields(updateCarRequest, car);
         return carRepository.save(car);
 
+    }
+
+    private void updateCarFields(UpdateCarRequest updateCarRequest, Car car) {
+        car.setDailyPrice(updateCarRequest.dailyPrice());
+        car.setModelYear(updateCarRequest.modelYear());
+        car.setPlate(updateCarRequest.plate());
+        car.setBrand(brandService.getBrandById(updateCarRequest.brandId()));
+        car.setColor(colorService.getColorById(updateCarRequest.colorId()));
     }
 
     @Override

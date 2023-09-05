@@ -1,5 +1,6 @@
-package com.alenbabayigit.carApp.user;
+package com.alenbabayigit.carApp.customer;
 
+import com.alenbabayigit.carApp.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Data;
@@ -8,7 +9,5 @@ import lombok.Data;
 @Data
 public class Customer extends User {
 
-    @Column
-    private String phoneNumber;
-
+  @Column private String phoneNumber;
 }

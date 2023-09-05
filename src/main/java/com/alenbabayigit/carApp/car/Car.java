@@ -21,7 +21,7 @@ public class Car {
     private Integer modelYear;
 
     @Column
-    private String description;
+    private String plate;
 
     @ManyToOne
     @JoinColumn(name = "brand_id", nullable = false)

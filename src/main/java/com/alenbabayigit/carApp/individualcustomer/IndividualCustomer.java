@@ -1,5 +1,6 @@
-package com.alenbabayigit.carApp.user;
+package com.alenbabayigit.carApp.individualcustomer;
 
+import com.alenbabayigit.carApp.customer.Customer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Data;

@@ -2,8 +2,6 @@ package com.alenbabayigit.carApp.api;
 
 import com.alenbabayigit.carApp.color.Color;
 import com.alenbabayigit.carApp.color.ColorServiceImpl;
-import java.util.List;
-
 import com.alenbabayigit.carApp.color.model.request.CreateColorRequest;
 import com.alenbabayigit.carApp.color.model.request.UpdateColorRequest;
 import com.alenbabayigit.carApp.color.model.response.ColorGetByIdResponse;

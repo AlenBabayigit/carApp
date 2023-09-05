@@ -1,3 +1,3 @@
-package com.alenbabayigit.carApp.user.model.response;
+package com.alenbabayigit.carApp.customer.model.response;
 
 public record CustomerGetByIdResponse(String email, String password, String phoneNumber) {}

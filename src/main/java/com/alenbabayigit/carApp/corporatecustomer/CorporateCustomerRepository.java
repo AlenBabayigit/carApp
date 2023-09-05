@@ -1,4 +1,4 @@
-package com.alenbabayigit.carApp.user;
+package com.alenbabayigit.carApp.corporatecustomer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

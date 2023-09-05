@@ -21,9 +21,17 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand create(CreateBrandRequest createBrandRequest) {
+        checkBrandIsAlreadyExists(createBrandRequest.name());
         Brand brand = new Brand();
         brand.setName(createBrandRequest.name());
         return brandRepository.save(brand);
+    }
+
+    private void checkBrandIsAlreadyExists(String name) {
+        boolean isBrandExists = brandRepository.existsBrandByNameIgnoreCase(name);
+        if (isBrandExists) {
+            throw new BusinessException("Brand already exists: " + name);
+        }
     }
 
     @Override
@@ -40,6 +48,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand update(Integer id, UpdateBrandRequest updateBrandRequest) {
+        checkBrandIsAlreadyExists(updateBrandRequest.name());
         Brand brand = getBrandById(id);
         brand.setName(updateBrandRequest.name());
         return brandRepository.save(brand);

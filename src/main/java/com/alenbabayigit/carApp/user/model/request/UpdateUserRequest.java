@@ -1,5 +1,3 @@
 package com.alenbabayigit.carApp.user.model.request;
 
-public record UpdateUserRequest(String email, String password) {
-
-}
+public record UpdateUserRequest(String email, String password) {}

@@ -2,8 +2,6 @@ package com.alenbabayigit.carApp.api;
 
 import com.alenbabayigit.carApp.car.Car;
 import com.alenbabayigit.carApp.car.CarServiceImpl;
-import java.util.List;
-
 import com.alenbabayigit.carApp.car.model.request.CreateCarRequest;
 import com.alenbabayigit.carApp.car.model.request.UpdateCarRequest;
 import com.alenbabayigit.carApp.car.model.response.CarGetByIdResponse;

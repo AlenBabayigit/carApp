@@ -5,10 +5,9 @@ import com.alenbabayigit.carApp.user.model.request.UpdateUserRequest;
 import com.alenbabayigit.carApp.user.model.response.UserGetAllResponse;
 import com.alenbabayigit.carApp.user.model.response.UserGetByIdResponse;
 import com.alenbabayigit.carApp.util.ResponseBuilder;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {

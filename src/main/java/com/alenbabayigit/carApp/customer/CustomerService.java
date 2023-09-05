@@ -1,7 +1,7 @@
-package com.alenbabayigit.carApp.user;
+package com.alenbabayigit.carApp.customer;
 
-import com.alenbabayigit.carApp.user.model.request.UpdateCustomerRequest;
-import com.alenbabayigit.carApp.user.model.response.CustomerGetByIdResponse;
+import com.alenbabayigit.carApp.customer.model.request.UpdateCustomerRequest;
+import com.alenbabayigit.carApp.customer.model.response.CustomerGetByIdResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface CustomerService {

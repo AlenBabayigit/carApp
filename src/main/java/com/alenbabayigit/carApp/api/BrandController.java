@@ -2,8 +2,6 @@ package com.alenbabayigit.carApp.api;
 
 import com.alenbabayigit.carApp.brand.Brand;
 import com.alenbabayigit.carApp.brand.BrandServiceImpl;
-import java.util.List;
-
 import com.alenbabayigit.carApp.brand.model.request.CreateBrandRequest;
 import com.alenbabayigit.carApp.brand.model.request.UpdateBrandRequest;
 import com.alenbabayigit.carApp.brand.model.response.BrandGetByIdResponse;

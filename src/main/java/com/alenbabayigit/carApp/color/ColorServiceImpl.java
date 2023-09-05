@@ -6,10 +6,9 @@ import com.alenbabayigit.carApp.color.model.response.ColorGetAllResponse;
 import com.alenbabayigit.carApp.color.model.response.ColorGetByIdResponse;
 import com.alenbabayigit.carApp.exception.BusinessException;
 import com.alenbabayigit.carApp.util.ResponseBuilder;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ColorServiceImpl implements ColorService {
@@ -22,9 +21,17 @@ public class ColorServiceImpl implements ColorService {
 
     @Override
     public Color create(CreateColorRequest createColorRequest) {
+        checkColorIsAlreadyExists(createColorRequest.name());
         Color color = new Color();
         color.setName(createColorRequest.name());
         return colorRepository.save(color);
+    }
+
+    private void checkColorIsAlreadyExists(String name) {
+        boolean isColorExists = colorRepository.existsColorByNameIgnoreCase(name);
+        if (isColorExists) {
+            throw new BusinessException("Color already exists: " + name);
+        }
     }
 
     @Override
@@ -41,6 +48,7 @@ public class ColorServiceImpl implements ColorService {
 
     @Override
     public Color update(Integer id, UpdateColorRequest updateColorRequest) {
+        checkColorIsAlreadyExists(updateColorRequest.name());
         Color color = getColorById(id);
         color.setName(updateColorRequest.name());
         return colorRepository.save(color);
