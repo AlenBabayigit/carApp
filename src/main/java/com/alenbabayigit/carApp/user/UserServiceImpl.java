@@ -21,7 +21,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
+        checkEmailAlreadyExists(user.getEmail());
         return userRepository.save(user);
+    }
+
+    public void checkEmailAlreadyExists(String email) {
+        boolean isEmailExists = userRepository.existsUserByEmailIgnoreCase(email);
+        if (isEmailExists) {
+            throw new BusinessException("Email already exists: " + email);
+        }
     }
 
     @Override
@@ -39,6 +47,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(Integer id, UpdateUserRequest updateUserRequest) {
+        checkEmailAlreadyExists(updateUserRequest.email());
         User user = getUserById(id);
         user.setEmail(updateUserRequest.email());
         user.setPassword(updateUserRequest.password());

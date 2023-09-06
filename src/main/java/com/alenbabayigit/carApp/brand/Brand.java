@@ -8,11 +8,11 @@ import lombok.Data;
 @Data
 public class Brand {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column
-  private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private Integer id;
 
-  @Column(name = "name", nullable = false, unique = true)
-  private String name;
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
 }
