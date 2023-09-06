@@ -25,7 +25,7 @@ public class CarController {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        return carService.getAll();
+    return carService.getAll();
     }
 
     @GetMapping("/{id}")
@@ -34,7 +34,7 @@ public class CarController {
     }
 
     @PutMapping("/{id}")
-    public Car update(@PathVariable Integer  id, @RequestBody UpdateCarRequest updateCarRequest) {
+    public Car update(@PathVariable Integer id, @RequestBody UpdateCarRequest updateCarRequest) {
         return carService.update(id, updateCarRequest);
     }
 

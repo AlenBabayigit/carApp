@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getUserById(Integer id) {
+    public Customer getCustomerById(Integer id) {
         return null;
     }
 

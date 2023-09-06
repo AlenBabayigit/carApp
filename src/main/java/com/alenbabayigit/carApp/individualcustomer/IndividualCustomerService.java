@@ -14,7 +14,7 @@ public interface IndividualCustomerService {
 
     IndividualCustomer update(Integer id, UpdateIndividualCustomerRequest updateIndividualCustomerRequest);
 
-    IndividualCustomer getUserById(Integer id);
+    IndividualCustomer getIndividualCustomerById(Integer id);
 
     void delete(Integer id);
 }

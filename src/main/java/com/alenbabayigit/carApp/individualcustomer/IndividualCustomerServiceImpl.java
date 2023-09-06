@@ -29,7 +29,7 @@ public class IndividualCustomerServiceImpl implements IndividualCustomerService 
     }
 
     @Override
-    public IndividualCustomer getUserById(Integer id) {
+    public IndividualCustomer getIndividualCustomerById(Integer id) {
         return null;
     }
 

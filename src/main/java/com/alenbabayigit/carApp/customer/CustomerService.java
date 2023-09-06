@@ -5,15 +5,15 @@ import com.alenbabayigit.carApp.customer.model.response.CustomerGetByIdResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface CustomerService {
-    Customer create(Customer customer);
+  Customer create(Customer customer);
 
-    CustomerGetByIdResponse getById(Integer id);
+  CustomerGetByIdResponse getById(Integer id);
 
-    ResponseEntity<?> getAll();
+  ResponseEntity<?> getAll();
 
-    Customer update(Integer id, UpdateCustomerRequest updateCustomerRequest);
+  Customer update(Integer id, UpdateCustomerRequest updateCustomerRequest);
 
-    Customer getUserById(Integer id);
+  Customer getCustomerById(Integer id);
 
-    void delete(Integer id);
+  void delete(Integer id);
 }
