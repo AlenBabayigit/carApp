@@ -1,5 +1,6 @@
 package com.alenbabayigit.carApp.customer;
 
+import com.alenbabayigit.carApp.customer.model.request.CreateCustomerRequest;
 import com.alenbabayigit.carApp.customer.model.request.UpdateCustomerRequest;
 import com.alenbabayigit.carApp.customer.model.response.CustomerGetAllResponse;
 import com.alenbabayigit.carApp.customer.model.response.CustomerGetByIdResponse;
@@ -20,8 +21,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer create(Customer customer) {
-        checkCustomerAlreadyExists(customer.getEmail(), customer.getPhoneNumber());
+    public Customer create(CreateCustomerRequest createCustomerRequest) {
+        checkCustomerAlreadyExists(createCustomerRequest.email(), createCustomerRequest.phoneNumber());
+        Customer customer = new Customer();
+        customer.setEmail(createCustomerRequest.email());
+        customer.setPassword(createCustomerRequest.password());
+        customer.setPhoneNumber(createCustomerRequest.phoneNumber());
         return customerRepository.save(customer);
     }
 
