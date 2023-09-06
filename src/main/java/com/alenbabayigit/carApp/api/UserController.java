@@ -2,6 +2,7 @@ package com.alenbabayigit.carApp.api;
 
 import com.alenbabayigit.carApp.user.User;
 import com.alenbabayigit.carApp.user.UserServiceImpl;
+import com.alenbabayigit.carApp.user.model.request.CreateUserRequest;
 import com.alenbabayigit.carApp.user.model.request.UpdateUserRequest;
 import com.alenbabayigit.carApp.user.model.response.UserGetByIdResponse;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userService.create(user);
+    public User create(@RequestBody CreateUserRequest createUserRequest) {
+        return userService.create(createUserRequest);
     }
 
     @GetMapping

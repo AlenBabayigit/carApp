@@ -1,12 +1,13 @@
 package com.alenbabayigit.carApp.user;
 
+import com.alenbabayigit.carApp.user.model.request.CreateUserRequest;
 import com.alenbabayigit.carApp.user.model.request.UpdateUserRequest;
 import com.alenbabayigit.carApp.user.model.response.UserGetByIdResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface UserService {
 
-    User create(User user);
+    User create(CreateUserRequest createUserRequest);
 
     UserGetByIdResponse getById(Integer id);
 

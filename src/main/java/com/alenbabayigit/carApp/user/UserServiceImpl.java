@@ -1,6 +1,7 @@
 package com.alenbabayigit.carApp.user;
 
 import com.alenbabayigit.carApp.exception.BusinessException;
+import com.alenbabayigit.carApp.user.model.request.CreateUserRequest;
 import com.alenbabayigit.carApp.user.model.request.UpdateUserRequest;
 import com.alenbabayigit.carApp.user.model.response.UserGetAllResponse;
 import com.alenbabayigit.carApp.user.model.response.UserGetByIdResponse;
@@ -20,8 +21,11 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User create(User user) {
-        checkEmailAlreadyExists(user.getEmail());
+    public User create(CreateUserRequest createUserRequest) {
+        checkEmailAlreadyExists(createUserRequest.email());
+        User user = new User();
+        user.setEmail(createUserRequest.email());
+        user.setPassword(createUserRequest.password());
         return userRepository.save(user);
     }
 
