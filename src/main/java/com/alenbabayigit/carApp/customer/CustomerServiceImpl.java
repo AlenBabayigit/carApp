@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public void checkCustomerAlreadyExists(String email, String phoneNumber) {
-        boolean isCustomerExists = customerRepository.existsCustomerByEmailIgnoreCaseAndPhoneNumber(email, phoneNumber);
+        boolean isCustomerExists = customerRepository.existsCustomerByEmailIgnoreCaseOrPhoneNumber(email, phoneNumber);
         if (isCustomerExists) {
             throw new BusinessException("Customer already exists with the following email & phone number: " + email + ", " + phoneNumber);
         }
