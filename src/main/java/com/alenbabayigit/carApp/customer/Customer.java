@@ -9,5 +9,7 @@ import lombok.Data;
 @Data
 public class Customer extends User {
 
-  @Column private String phoneNumber;
+    @Column
+    private String phoneNumber;
+
 }
