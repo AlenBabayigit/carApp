@@ -21,13 +21,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer create(CreateCustomerRequest createCustomerRequest) {
+    public ResponseEntity<?> create(CreateCustomerRequest createCustomerRequest) {
         checkCustomerAlreadyExists(createCustomerRequest.email(), createCustomerRequest.phoneNumber());
         Customer customer = new Customer();
         customer.setEmail(createCustomerRequest.email());
         customer.setPassword(createCustomerRequest.password());
         customer.setPhoneNumber(createCustomerRequest.phoneNumber());
-        return customerRepository.save(customer);
+        return ResponseBuilder.success("Customer created successfully", customerRepository.save(customer));
     }
 
     public void checkCustomerAlreadyExists(String email, String phoneNumber) {
@@ -38,9 +38,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerGetByIdResponse getById(Integer id) {
+    public ResponseEntity<?> getById(Integer id) {
         Customer customer = getCustomerById(id);
-        return new CustomerGetByIdResponse(customer.getEmail(), customer.getPassword(), customer.getPhoneNumber());
+        return ResponseBuilder.success("Data listed successfully.",
+                new CustomerGetByIdResponse(customer.getEmail(), customer.getPassword(), customer.getPhoneNumber()));
     }
 
     @Override
@@ -52,13 +53,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer update(Integer id, UpdateCustomerRequest updateCustomerRequest) {
+    public ResponseEntity<?> update(Integer id, UpdateCustomerRequest updateCustomerRequest) {
         checkCustomerAlreadyExists(updateCustomerRequest.email(), updateCustomerRequest.phoneNumber());
         Customer customer = getCustomerById(id);
         customer.setEmail(updateCustomerRequest.email());
         customer.setPassword(updateCustomerRequest.password());
         customer.setPhoneNumber(updateCustomerRequest.phoneNumber());
-        return customerRepository.save(customer);
+        return ResponseBuilder.success("Customer updated successfully.", customerRepository.save(customer));
     }
 
     @Override
@@ -67,8 +68,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         getCustomerById(id);
         customerRepository.deleteById(id);
+        return ResponseBuilder.success("Customer deleted successfully.", null);
     }
 }
