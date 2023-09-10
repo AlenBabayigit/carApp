@@ -7,6 +7,7 @@ import com.alenbabayigit.carApp.brand.model.response.BrandGetByIdResponse;
 import com.alenbabayigit.carApp.exception.BusinessException;
 import com.alenbabayigit.carApp.util.ResponseBuilder;
 import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +21,11 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand create(CreateBrandRequest createBrandRequest) {
+    public ResponseEntity<?> create(CreateBrandRequest createBrandRequest) {
         checkBrandIsAlreadyExists(createBrandRequest.name());
         Brand brand = new Brand();
         brand.setName(createBrandRequest.name());
-        return brandRepository.save(brand);
+        return ResponseBuilder.success("Brand created successfully.", brandRepository.save(brand));
     }
 
     private void checkBrandIsAlreadyExists(String name) {
@@ -35,9 +36,9 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public BrandGetByIdResponse getById(Integer id) {
+    public ResponseEntity<?> getById(Integer id) {
         Brand brand = getBrandById(id);
-        return new BrandGetByIdResponse(brand.getName());
+        return ResponseBuilder.success("Data listed successfully.", new BrandGetByIdResponse(brand.getName()));
     }
 
     @Override
@@ -47,11 +48,11 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand update(Integer id, UpdateBrandRequest updateBrandRequest) {
+    public ResponseEntity<?> update(Integer id, UpdateBrandRequest updateBrandRequest) {
         checkBrandIsAlreadyExists(updateBrandRequest.name());
         Brand brand = getBrandById(id);
         brand.setName(updateBrandRequest.name());
-        return brandRepository.save(brand);
+        return ResponseBuilder.success("", brandRepository.save(brand));
     }
 
     @Override
@@ -60,8 +61,9 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         getBrandById(id);
         brandRepository.deleteById(id);
+        return ResponseBuilder.success("Brand deleted successfully.", null);
     }
 }
