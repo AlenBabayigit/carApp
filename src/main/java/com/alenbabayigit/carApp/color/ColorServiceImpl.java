@@ -20,11 +20,11 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public Color create(CreateColorRequest createColorRequest) {
+    public ResponseEntity<?> create(CreateColorRequest createColorRequest) {
         checkColorIsAlreadyExists(createColorRequest.name());
         Color color = new Color();
         color.setName(createColorRequest.name());
-        return colorRepository.save(color);
+        return ResponseBuilder.success("Color created successfully.", colorRepository.save(color));
     }
 
     private void checkColorIsAlreadyExists(String name) {
@@ -35,9 +35,9 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public ColorGetByIdResponse getById(Integer id) {
+    public ResponseEntity<?> getById(Integer id) {
         Color color = getColorById(id);
-        return new ColorGetByIdResponse(color.getName());
+        return ResponseBuilder.success("Data listed successfully.", new ColorGetByIdResponse(color.getName()));
     }
 
     @Override
@@ -47,11 +47,11 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public Color update(Integer id, UpdateColorRequest updateColorRequest) {
+    public ResponseEntity<?> update(Integer id, UpdateColorRequest updateColorRequest) {
         checkColorIsAlreadyExists(updateColorRequest.name());
         Color color = getColorById(id);
         color.setName(updateColorRequest.name());
-        return colorRepository.save(color);
+        return ResponseBuilder.success("Color updated successfully.", colorRepository.save(color));
 
     }
 
@@ -61,9 +61,9 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         getColorById(id);
         colorRepository.deleteById(id);
+        return ResponseBuilder.success("Color deleted successfully.", null);
     }
-
 }
