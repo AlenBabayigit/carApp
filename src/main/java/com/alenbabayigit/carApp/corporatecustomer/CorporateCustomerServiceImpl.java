@@ -21,15 +21,20 @@ public class CorporateCustomerServiceImpl implements CorporateCustomerService {
     }
 
     @Override
-    public CorporateCustomer create(CreateCorporateCustomerRequest createCorporateCustomerRequest) {
+    public ResponseEntity<?> create(CreateCorporateCustomerRequest createCorporateCustomerRequest) {
         checkCorporateCustomerAlreadyExists(createCorporateCustomerRequest.email(), createCorporateCustomerRequest.phoneNumber(), createCorporateCustomerRequest.taxNumber());
+        CorporateCustomer corporateCustomer = createCorporateCustomerFromCreateCorporateCustomerRequest(createCorporateCustomerRequest);
+        return ResponseBuilder.success("Corporate customer created successfully.", corporateCustomerRepository.save(corporateCustomer));
+    }
+
+    private static CorporateCustomer createCorporateCustomerFromCreateCorporateCustomerRequest(CreateCorporateCustomerRequest createCorporateCustomerRequest) {
         CorporateCustomer corporateCustomer = new CorporateCustomer();
         corporateCustomer.setEmail(createCorporateCustomerRequest.email());
         corporateCustomer.setPassword(createCorporateCustomerRequest.password());
         corporateCustomer.setPhoneNumber(createCorporateCustomerRequest.phoneNumber());
         corporateCustomer.setCompanyName(createCorporateCustomerRequest.companyName());
         corporateCustomer.setTaxNumber(createCorporateCustomerRequest.taxNumber());
-        return corporateCustomerRepository.save(corporateCustomer);
+        return corporateCustomer;
     }
 
     public void checkCorporateCustomerAlreadyExists(String email, String phoneNumber, String taxNumber) {
@@ -40,15 +45,14 @@ public class CorporateCustomerServiceImpl implements CorporateCustomerService {
             throw new BusinessException("Corporate customer already exists with following email, phone number & tax number: "
                     + email + ", " + phoneNumber + ", " + taxNumber);
         }
-
-
     }
 
     @Override
-    public CorporateCustomerGetByIdResponse getById(Integer id) {
+    public ResponseEntity<?> getById(Integer id) {
         CorporateCustomer corporateCustomer = getCorporateCustomerById(id);
-        return new CorporateCustomerGetByIdResponse(corporateCustomer.getEmail(), corporateCustomer.getPassword(),
-            corporateCustomer.getPhoneNumber(), corporateCustomer.getCompanyName(), corporateCustomer.getTaxNumber());
+        return ResponseBuilder.success("Data listed successfully.",
+                new CorporateCustomerGetByIdResponse(corporateCustomer.getEmail(), corporateCustomer.getPassword(),
+                        corporateCustomer.getPhoneNumber(), corporateCustomer.getCompanyName(), corporateCustomer.getTaxNumber()));
     }
 
     @Override
@@ -58,18 +62,23 @@ public class CorporateCustomerServiceImpl implements CorporateCustomerService {
     }
 
     @Override
-    public CorporateCustomer update(Integer id, UpdateCorporateCustomerRequest updateCorporateCustomerRequest) {
+    public ResponseEntity<?> update(Integer id, UpdateCorporateCustomerRequest updateCorporateCustomerRequest) {
         checkCorporateCustomerAlreadyExists(
             updateCorporateCustomerRequest.email(),
             updateCorporateCustomerRequest.phoneNumber(),
             updateCorporateCustomerRequest.taxNumber());
+        CorporateCustomer corporateCustomer = updateCorporateCustomerFromUpdateCorporateCustomerRequest(id, updateCorporateCustomerRequest);
+        return ResponseBuilder.success("Corporate customer updated successfully.", corporateCustomerRepository.save(corporateCustomer));
+    }
+
+    private CorporateCustomer updateCorporateCustomerFromUpdateCorporateCustomerRequest(Integer id, UpdateCorporateCustomerRequest updateCorporateCustomerRequest) {
         CorporateCustomer corporateCustomer = getCorporateCustomerById(id);
         corporateCustomer.setEmail(updateCorporateCustomerRequest.email());
         corporateCustomer.setPassword(updateCorporateCustomerRequest.password());
         corporateCustomer.setPhoneNumber(updateCorporateCustomerRequest.phoneNumber());
         corporateCustomer.setCompanyName(updateCorporateCustomerRequest.companyName());
         corporateCustomer.setTaxNumber(updateCorporateCustomerRequest.taxNumber());
-        return corporateCustomerRepository.save(corporateCustomer);
+        return corporateCustomer;
     }
 
     @Override
@@ -78,8 +87,9 @@ public class CorporateCustomerServiceImpl implements CorporateCustomerService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         getCorporateCustomerById(id);
         corporateCustomerRepository.deleteById(id);
+        return ResponseBuilder.success("Corporate customer deleted successfully.", null);
     }
 }

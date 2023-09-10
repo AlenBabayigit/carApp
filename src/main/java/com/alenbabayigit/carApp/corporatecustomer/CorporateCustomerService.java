@@ -8,16 +8,16 @@ import org.springframework.http.ResponseEntity;
 
 public interface CorporateCustomerService {
 
-    CorporateCustomer create(CreateCorporateCustomerRequest createCorporateCustomerRequest);
+    ResponseEntity<?> create(CreateCorporateCustomerRequest createCorporateCustomerRequest);
 
-    CorporateCustomerGetByIdResponse getById(Integer id);
+    ResponseEntity<?> getById(Integer id);
 
     ResponseEntity<?> getAll();
 
-    CorporateCustomer update(Integer id, UpdateCorporateCustomerRequest updateCorporateCustomerRequest);
+    ResponseEntity<?> update(Integer id, UpdateCorporateCustomerRequest updateCorporateCustomerRequest);
 
     CorporateCustomer getCorporateCustomerById(Integer id);
 
-    void delete(Integer id);
+    ResponseEntity<?> delete(Integer id);
 
 }
