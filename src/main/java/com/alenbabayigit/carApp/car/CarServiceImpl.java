@@ -94,12 +94,11 @@ public class CarServiceImpl implements CarService {
     @Override
     public Car getCarById(Integer id) {
         return carRepository.findById(id).orElseThrow(() -> new BusinessException("There is no car with following id: " + id));
-  }
+    }
 
     @Override
     public void delete(Integer id) {
         getCarById(id);
         carRepository.deleteById(id);
     }
-
 }
