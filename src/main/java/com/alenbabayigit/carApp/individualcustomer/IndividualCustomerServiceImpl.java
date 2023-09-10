@@ -61,11 +61,8 @@ public class IndividualCustomerServiceImpl implements IndividualCustomerService 
     public ResponseEntity<?> getAll() {
     List<IndividualCustomerGetAllResponse> list =
         individualCustomerRepository.findAll().stream()
-            .map(
-                individualCustomer ->
-                        createIndividualCustomerGetAllResponseFromIndividualCustomer(individualCustomer)).toList();
+            .map(IndividualCustomerServiceImpl::createIndividualCustomerGetAllResponseFromIndividualCustomer).toList();
         return ResponseBuilder.success("Data listed successfully.", list);
-
     }
 
     private static IndividualCustomerGetAllResponse createIndividualCustomerGetAllResponseFromIndividualCustomer(IndividualCustomer individualCustomer) {
@@ -80,11 +77,11 @@ public class IndividualCustomerServiceImpl implements IndividualCustomerService 
     }
 
     @Override
-    public IndividualCustomer update(Integer id, UpdateIndividualCustomerRequest updateIndividualCustomerRequest) {
+    public ResponseEntity<?> update(Integer id, UpdateIndividualCustomerRequest updateIndividualCustomerRequest) {
         checkIndividualCustomerAlreadyExists(updateIndividualCustomerRequest.email(), updateIndividualCustomerRequest.phoneNumber(), updateIndividualCustomerRequest.nationalId());
         IndividualCustomer individualCustomer = getIndividualCustomerById(id);
         updateIndividualCustomerFields(updateIndividualCustomerRequest, individualCustomer);
-        return individualCustomerRepository.save(individualCustomer);
+        return ResponseBuilder.success("Individual customer updated successfully", individualCustomerRepository.save(individualCustomer));
     }
 
     private static void updateIndividualCustomerFields(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, IndividualCustomer individualCustomer) {

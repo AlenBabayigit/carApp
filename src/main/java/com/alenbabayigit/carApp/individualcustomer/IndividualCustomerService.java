@@ -2,7 +2,6 @@ package com.alenbabayigit.carApp.individualcustomer;
 
 import com.alenbabayigit.carApp.individualcustomer.model.request.CreateIndividualCustomerRequest;
 import com.alenbabayigit.carApp.individualcustomer.model.request.UpdateIndividualCustomerRequest;
-import com.alenbabayigit.carApp.individualcustomer.model.response.IndividualCustomerGetByIdResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface IndividualCustomerService {
@@ -12,7 +11,7 @@ public interface IndividualCustomerService {
 
     ResponseEntity<?> getAll();
 
-    IndividualCustomer update(Integer id, UpdateIndividualCustomerRequest updateIndividualCustomerRequest);
+    ResponseEntity<?> update(Integer id, UpdateIndividualCustomerRequest updateIndividualCustomerRequest);
 
     IndividualCustomer getIndividualCustomerById(Integer id);
 
