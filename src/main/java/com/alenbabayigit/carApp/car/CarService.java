@@ -7,15 +7,15 @@ import com.alenbabayigit.carApp.car.model.response.CarGetByIdResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface CarService {
-    Car create(CreateCarRequest createCarRequest);
+    ResponseEntity<?> create(CreateCarRequest createCarRequest);
 
-    CarGetByIdResponse getById(Integer id);
+    ResponseEntity<?> getById(Integer id);
 
     ResponseEntity<?> getAll();
 
-    Car update(Integer id, UpdateCarRequest updateCarRequest);
+    ResponseEntity<?> update(Integer id, UpdateCarRequest updateCarRequest);
 
     Car getCarById(Integer id);
 
-    void delete(Integer id);
+    ResponseEntity<?> delete(Integer id);
 }

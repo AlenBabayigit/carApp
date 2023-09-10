@@ -28,10 +28,10 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car create(CreateCarRequest createCarRequest) {
+    public ResponseEntity<?> create(CreateCarRequest createCarRequest) {
         checkCarIsAlreadyExists(createCarRequest.plate());
         Car car = createCarFromRequest(createCarRequest);
-        return carRepository.save(car);
+        return ResponseBuilder.success("Car created successfully.", carRepository.save(car));
     }
 
     private void checkCarIsAlreadyExists(String plate) {
@@ -52,8 +52,12 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public CarGetByIdResponse getById(Integer id) {
+    public ResponseEntity<?> getById(Integer id) {
         Car car = getCarById(id);
+        return ResponseBuilder.success("Data listed successfully.", createCarGetByIdResponseFromCar(car));
+    }
+
+    private static CarGetByIdResponse createCarGetByIdResponseFromCar(Car car) {
         return new CarGetByIdResponse(car.getDailyPrice(), car.getModelYear(), car.getPlate(),
                 new BrandGetByIdResponse(car.getBrand().getName()), new ColorGetByIdResponse(car.getColor().getName()));
     }
@@ -62,25 +66,26 @@ public class CarServiceImpl implements CarService {
     public ResponseEntity<?> getAll() {
     List<CarGetAllResponse> list =
         carRepository.findAll().stream()
-            .map(
-                car ->
-                    new CarGetAllResponse(
-                        car.getId(),
-                        car.getDailyPrice(),
-                        car.getModelYear(),
-                        car.getPlate(),
-                        new BrandGetByIdResponse(car.getBrand().getName()),
-                        new ColorGetByIdResponse(car.getColor().getName()))).toList();
+            .map(car -> createCarGetAllResponseFromCar(car)).toList();
         return ResponseBuilder.success("Data listed successfully.", list);
     }
 
+    private static CarGetAllResponse createCarGetAllResponseFromCar(Car car) {
+        return new CarGetAllResponse(
+                car.getId(),
+                car.getDailyPrice(),
+                car.getModelYear(),
+                car.getPlate(),
+                new BrandGetByIdResponse(car.getBrand().getName()),
+                new ColorGetByIdResponse(car.getColor().getName()));
+    }
+
     @Override
-    public Car update(Integer id, UpdateCarRequest updateCarRequest) {
+    public ResponseEntity<?> update(Integer id, UpdateCarRequest updateCarRequest) {
         checkCarIsAlreadyExists(updateCarRequest.plate());
         Car car = getCarById(id);
         updateCarFields(updateCarRequest, car);
-        return carRepository.save(car);
-
+        return ResponseBuilder.success("Data updated successfully.", carRepository.save(car));
     }
 
     private void updateCarFields(UpdateCarRequest updateCarRequest, Car car) {
@@ -97,8 +102,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         getCarById(id);
         carRepository.deleteById(id);
+        return ResponseBuilder.success("Car deleted successfully.", null);
     }
 }
