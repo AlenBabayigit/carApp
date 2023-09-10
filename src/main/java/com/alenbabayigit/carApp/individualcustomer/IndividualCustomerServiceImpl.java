@@ -21,8 +21,14 @@ public class IndividualCustomerServiceImpl implements IndividualCustomerService 
     }
 
     @Override
-    public IndividualCustomer create(CreateIndividualCustomerRequest createIndividualCustomerRequest) {
+    public ResponseEntity<?> create(CreateIndividualCustomerRequest createIndividualCustomerRequest) {
         checkIndividualCustomerAlreadyExists(createIndividualCustomerRequest.email(), createIndividualCustomerRequest.phoneNumber(), createIndividualCustomerRequest.nationalId());
+        IndividualCustomer individualCustomer = createIndividualCustomerFromCreateIndividualCustomerRequest(createIndividualCustomerRequest);
+        individualCustomerRepository.save(individualCustomer);
+        return ResponseBuilder.success("Individual customer created successfully.", createIndividualCustomerRequest);
+    }
+
+    private static IndividualCustomer createIndividualCustomerFromCreateIndividualCustomerRequest(CreateIndividualCustomerRequest createIndividualCustomerRequest) {
         IndividualCustomer individualCustomer = new IndividualCustomer();
         individualCustomer.setEmail(createIndividualCustomerRequest.email());
         individualCustomer.setPassword(createIndividualCustomerRequest.password());
@@ -30,7 +36,7 @@ public class IndividualCustomerServiceImpl implements IndividualCustomerService 
         individualCustomer.setName(createIndividualCustomerRequest.name());
         individualCustomer.setLastname(createIndividualCustomerRequest.lastname());
         individualCustomer.setNationalId(createIndividualCustomerRequest.nationalId());
-        return individualCustomerRepository.save(individualCustomer);
+        return individualCustomer;
     }
 
     public void checkIndividualCustomerAlreadyExists(String email, String phoneNumber, String nationalId) {
@@ -45,10 +51,10 @@ public class IndividualCustomerServiceImpl implements IndividualCustomerService 
     }
 
     @Override
-    public IndividualCustomerGetByIdResponse getById(Integer id) {
+    public ResponseEntity<?> getById(Integer id) {
         IndividualCustomer individualCustomer = getIndividualCustomerById(id);
-        return new IndividualCustomerGetByIdResponse(individualCustomer.getEmail(), individualCustomer.getPassword(),
-                individualCustomer.getPhoneNumber(), individualCustomer.getName(), individualCustomer.getLastname(), individualCustomer.getNationalId());
+        return ResponseBuilder.success("Data listed successfully", new IndividualCustomerGetByIdResponse(individualCustomer.getEmail(), individualCustomer.getPassword(),
+                individualCustomer.getPhoneNumber(), individualCustomer.getName(), individualCustomer.getLastname(), individualCustomer.getNationalId()));
     }
 
     @Override
@@ -57,29 +63,37 @@ public class IndividualCustomerServiceImpl implements IndividualCustomerService 
         individualCustomerRepository.findAll().stream()
             .map(
                 individualCustomer ->
-                    new IndividualCustomerGetAllResponse(
-                        individualCustomer.getId(),
-                        individualCustomer.getEmail(),
-                        individualCustomer.getPassword(),
-                        individualCustomer.getPhoneNumber(),
-                        individualCustomer.getName(),
-                        individualCustomer.getLastname(),
-                        individualCustomer.getNationalId())).toList();
+                        createIndividualCustomerGetAllResponseFromIndividualCustomer(individualCustomer)).toList();
         return ResponseBuilder.success("Data listed successfully.", list);
 
+    }
+
+    private static IndividualCustomerGetAllResponse createIndividualCustomerGetAllResponseFromIndividualCustomer(IndividualCustomer individualCustomer) {
+        return new IndividualCustomerGetAllResponse(
+                individualCustomer.getId(),
+                individualCustomer.getEmail(),
+                individualCustomer.getPassword(),
+                individualCustomer.getPhoneNumber(),
+                individualCustomer.getName(),
+                individualCustomer.getLastname(),
+                individualCustomer.getNationalId());
     }
 
     @Override
     public IndividualCustomer update(Integer id, UpdateIndividualCustomerRequest updateIndividualCustomerRequest) {
         checkIndividualCustomerAlreadyExists(updateIndividualCustomerRequest.email(), updateIndividualCustomerRequest.phoneNumber(), updateIndividualCustomerRequest.nationalId());
         IndividualCustomer individualCustomer = getIndividualCustomerById(id);
+        updateIndividualCustomerFields(updateIndividualCustomerRequest, individualCustomer);
+        return individualCustomerRepository.save(individualCustomer);
+    }
+
+    private static void updateIndividualCustomerFields(UpdateIndividualCustomerRequest updateIndividualCustomerRequest, IndividualCustomer individualCustomer) {
         individualCustomer.setEmail(updateIndividualCustomerRequest.email());
         individualCustomer.setPassword(updateIndividualCustomerRequest.password());
         individualCustomer.setPhoneNumber(updateIndividualCustomerRequest.phoneNumber());
         individualCustomer.setName(updateIndividualCustomerRequest.name());
         individualCustomer.setLastname(updateIndividualCustomerRequest.lastname());
         individualCustomer.setNationalId(updateIndividualCustomerRequest.nationalId());
-        return individualCustomerRepository.save(individualCustomer);
     }
 
     @Override
@@ -88,8 +102,9 @@ public class IndividualCustomerServiceImpl implements IndividualCustomerService 
     }
 
     @Override
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         getIndividualCustomerById(id);
         individualCustomerRepository.deleteById(id);
+        return ResponseBuilder.success("Individual customer deleted successfully.", null);
     }
 }

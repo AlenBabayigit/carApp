@@ -6,9 +6,9 @@ import com.alenbabayigit.carApp.individualcustomer.model.response.IndividualCust
 import org.springframework.http.ResponseEntity;
 
 public interface IndividualCustomerService {
-    IndividualCustomer create(CreateIndividualCustomerRequest createIndividualCustomerRequest);
+    ResponseEntity<?> create(CreateIndividualCustomerRequest createIndividualCustomerRequest);
 
-    IndividualCustomerGetByIdResponse getById(Integer id);
+    ResponseEntity<?> getById(Integer id);
 
     ResponseEntity<?> getAll();
 
@@ -16,5 +16,5 @@ public interface IndividualCustomerService {
 
     IndividualCustomer getIndividualCustomerById(Integer id);
 
-    void delete(Integer id);
+    ResponseEntity<?> delete(Integer id);
 }
