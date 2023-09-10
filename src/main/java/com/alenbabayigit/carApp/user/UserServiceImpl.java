@@ -19,14 +19,13 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-
     @Override
-    public User create(CreateUserRequest createUserRequest) {
+    public ResponseEntity<?> create(CreateUserRequest createUserRequest) {
         checkEmailAlreadyExists(createUserRequest.email());
         User user = new User();
         user.setEmail(createUserRequest.email());
         user.setPassword(createUserRequest.password());
-        return userRepository.save(user);
+        return ResponseBuilder.success("User created successfully.", userRepository.save(user));
     }
 
     public void checkEmailAlreadyExists(String email) {
@@ -37,9 +36,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserGetByIdResponse getById(Integer id) {
+    public ResponseEntity<?> getById(Integer id) {
         User user = getUserById(id);
-        return new UserGetByIdResponse(user.getEmail(), user.getPassword());
+        return ResponseBuilder.success("Data listed succesfully.", new UserGetByIdResponse(user.getEmail(), user.getPassword()));
     }
 
     @Override
@@ -50,12 +49,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(Integer id, UpdateUserRequest updateUserRequest) {
+    public ResponseEntity<?> update(Integer id, UpdateUserRequest updateUserRequest) {
         checkEmailAlreadyExists(updateUserRequest.email());
         User user = getUserById(id);
         user.setEmail(updateUserRequest.email());
         user.setPassword(updateUserRequest.password());
-        return userRepository.save(user);
+        return ResponseBuilder.success("User updated successfully.", userRepository.save(user));
     }
 
     @Override
@@ -64,8 +63,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public ResponseEntity<?> delete(Integer id) {
         getUserById(id);
         userRepository.deleteById(id);
+        return ResponseBuilder.success("User deleted successfully.", null);
     }
 }

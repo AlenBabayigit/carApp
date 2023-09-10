@@ -7,15 +7,15 @@ import org.springframework.http.ResponseEntity;
 
 public interface UserService {
 
-    User create(CreateUserRequest createUserRequest);
+    ResponseEntity<?> create(CreateUserRequest createUserRequest);
 
-    UserGetByIdResponse getById(Integer id);
+    ResponseEntity<?> getById(Integer id);
 
     ResponseEntity<?> getAll();
 
-    User update(Integer id, UpdateUserRequest updateUserRequest);
+    ResponseEntity<?> update(Integer id, UpdateUserRequest updateUserRequest);
 
     User getUserById(Integer id);
 
-    void delete(Integer id);
+    ResponseEntity<?> delete(Integer id);
 }
