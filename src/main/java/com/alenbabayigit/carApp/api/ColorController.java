@@ -19,7 +19,7 @@ public class ColorController {
     }
 
     @PostMapping
-    public Color create(@RequestBody CreateColorRequest createColorRequest) {
+    public ResponseEntity<?> create(@RequestBody CreateColorRequest createColorRequest) {
         return colorService.create(createColorRequest);
     }
 
@@ -29,12 +29,12 @@ public class ColorController {
     }
 
     @GetMapping("/{id}")
-    public ColorGetByIdResponse getById(@PathVariable Integer id) {
+    public ResponseEntity<?> getById(@PathVariable Integer id) {
         return colorService.getById(id);
     }
 
     @PutMapping("/")
-    public Color update(@RequestParam Integer id, @RequestBody UpdateColorRequest updateColorRequest) {
+    public ResponseEntity<?> update(@RequestParam Integer id, @RequestBody UpdateColorRequest updateColorRequest) {
         return colorService.update(id, updateColorRequest);
     }
 

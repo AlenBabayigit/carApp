@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody CreateUserRequest createUserRequest) {
+    public ResponseEntity<?> create(@RequestBody CreateUserRequest createUserRequest) {
         return userService.create(createUserRequest);
     }
 
@@ -29,12 +29,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserGetByIdResponse getById(@PathVariable Integer id) {
+    public ResponseEntity<?> getById(@PathVariable Integer id) {
         return userService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public User update(@PathVariable Integer id, @RequestBody UpdateUserRequest updateUserRequest) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateUserRequest updateUserRequest) {
         return userService.update(id, updateUserRequest);
     }
 

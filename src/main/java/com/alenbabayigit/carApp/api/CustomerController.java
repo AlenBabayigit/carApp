@@ -20,7 +20,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public Customer create(@RequestBody CreateCustomerRequest createCustomerRequest) {
+    public ResponseEntity<?> create(@RequestBody CreateCustomerRequest createCustomerRequest) {
         return customerService.create(createCustomerRequest);
     }
 
@@ -30,12 +30,12 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public CustomerGetByIdResponse getById(@PathVariable Integer id) {
+    public ResponseEntity<?> getById(@PathVariable Integer id) {
         return customerService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public User update(@PathVariable Integer id, @RequestBody UpdateCustomerRequest updateCustomerRequest) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateCustomerRequest updateCustomerRequest) {
         return customerService.update(id, updateCustomerRequest);
     }
 

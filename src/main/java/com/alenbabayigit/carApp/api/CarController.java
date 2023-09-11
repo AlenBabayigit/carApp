@@ -19,7 +19,7 @@ public class CarController {
     }
 
     @PostMapping
-    public Car create(@RequestBody CreateCarRequest createCarRequest) {
+    public ResponseEntity<?> create(@RequestBody CreateCarRequest createCarRequest) {
         return carService.create(createCarRequest);
     }
 
@@ -29,12 +29,12 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
-    public CarGetByIdResponse getById(@PathVariable Integer id) {
+    public ResponseEntity<?> getById(@PathVariable Integer id) {
         return carService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public Car update(@PathVariable Integer id, @RequestBody UpdateCarRequest updateCarRequest) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateCarRequest updateCarRequest) {
         return carService.update(id, updateCarRequest);
     }
 

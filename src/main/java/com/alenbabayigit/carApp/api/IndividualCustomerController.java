@@ -22,7 +22,7 @@ public class IndividualCustomerController {
     }
 
     @PostMapping
-    public IndividualCustomer create(@RequestBody CreateIndividualCustomerRequest createIndividualCustomerRequest) {
+    public ResponseEntity<?> create(@RequestBody CreateIndividualCustomerRequest createIndividualCustomerRequest) {
         return individualCustomerService.create(createIndividualCustomerRequest);
     }
 
@@ -32,12 +32,12 @@ public class IndividualCustomerController {
     }
 
     @GetMapping("/{id}")
-    public IndividualCustomerGetByIdResponse getById(@PathVariable Integer id) {
+    public ResponseEntity<?> getById(@PathVariable Integer id) {
         return individualCustomerService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public IndividualCustomer update(@PathVariable Integer id, @RequestBody UpdateIndividualCustomerRequest updateIndividualCustomerRequest) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateIndividualCustomerRequest updateIndividualCustomerRequest) {
         return individualCustomerService.update(id, updateIndividualCustomerRequest);
     }
 

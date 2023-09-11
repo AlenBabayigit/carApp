@@ -19,7 +19,7 @@ public class BrandController {
     }
 
     @PostMapping
-    public Brand create(@RequestBody CreateBrandRequest createBrandRequest) {
+    public ResponseEntity<?> create(@RequestBody CreateBrandRequest createBrandRequest) {
         return brandService.create(createBrandRequest);
     }
 
@@ -29,12 +29,12 @@ public class BrandController {
     }
 
     @GetMapping("/{id}")
-    public BrandGetByIdResponse getById(@PathVariable Integer id) {
+    public ResponseEntity<?> getById(@PathVariable Integer id) {
         return brandService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public Brand update(@PathVariable Integer id, @RequestBody UpdateBrandRequest updateBrandRequest) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateBrandRequest updateBrandRequest) {
         return brandService.update(id, updateBrandRequest);
     }
 

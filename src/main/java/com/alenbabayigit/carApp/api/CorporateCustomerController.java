@@ -22,7 +22,7 @@ public class CorporateCustomerController {
     }
 
     @PostMapping
-    public CorporateCustomer create(@RequestBody CreateCorporateCustomerRequest createCorporateCustomerRequest) {
+    public ResponseEntity<?> create(@RequestBody CreateCorporateCustomerRequest createCorporateCustomerRequest) {
         return corporateCustomerService.create(createCorporateCustomerRequest);
     }
 
@@ -32,12 +32,12 @@ public class CorporateCustomerController {
     }
 
     @GetMapping("/{id}")
-    public CorporateCustomerGetByIdResponse getById(@PathVariable Integer id) {
+    public ResponseEntity<?> getById(@PathVariable Integer id) {
         return corporateCustomerService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public CorporateCustomer update(@PathVariable Integer id, @RequestBody UpdateCorporateCustomerRequest updateCorporateCustomerRequest) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateCorporateCustomerRequest updateCorporateCustomerRequest) {
         return corporateCustomerService.update(id, updateCorporateCustomerRequest);
     }
 
