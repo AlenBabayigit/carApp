@@ -1,10 +1,8 @@
 package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.color.Color;
 import com.alenbabayigit.carApp.color.ColorServiceImpl;
 import com.alenbabayigit.carApp.color.model.request.CreateColorRequest;
 import com.alenbabayigit.carApp.color.model.request.UpdateColorRequest;
-import com.alenbabayigit.carApp.color.model.response.ColorGetByIdResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +37,7 @@ public class ColorController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        colorService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        return colorService.delete(id);
     }
 }

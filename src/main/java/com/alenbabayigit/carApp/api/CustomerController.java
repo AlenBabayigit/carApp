@@ -1,11 +1,8 @@
 package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.customer.Customer;
 import com.alenbabayigit.carApp.customer.CustomerServiceImpl;
 import com.alenbabayigit.carApp.customer.model.request.CreateCustomerRequest;
 import com.alenbabayigit.carApp.customer.model.request.UpdateCustomerRequest;
-import com.alenbabayigit.carApp.customer.model.response.CustomerGetByIdResponse;
-import com.alenbabayigit.carApp.user.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,8 +37,8 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        customerService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        return customerService.delete(id);
     }
 
 

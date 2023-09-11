@@ -1,10 +1,8 @@
 package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.car.Car;
 import com.alenbabayigit.carApp.car.CarServiceImpl;
 import com.alenbabayigit.carApp.car.model.request.CreateCarRequest;
 import com.alenbabayigit.carApp.car.model.request.UpdateCarRequest;
-import com.alenbabayigit.carApp.car.model.response.CarGetByIdResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +37,7 @@ public class CarController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        carService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        return carService.delete(id);
     }
 }
