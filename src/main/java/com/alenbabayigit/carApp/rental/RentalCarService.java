@@ -18,5 +18,7 @@ public interface RentalCarService {
 
     ResponseEntity<?> update(Integer id, UpdateRentRequest updateRentRequest);
 
+    RentalCar getRentalCarById(Integer id);
+
     ResponseEntity<?> delete(Integer id);
 }

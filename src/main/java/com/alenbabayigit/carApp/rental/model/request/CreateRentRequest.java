@@ -1,3 +1,5 @@
 package com.alenbabayigit.carApp.rental.model.request;
 
-public class CreateRentRequest {}
+import java.time.LocalDateTime;
+
+public record CreateRentRequest(Integer customerId, Integer carId, LocalDateTime rentDate, LocalDateTime returnDate) {}

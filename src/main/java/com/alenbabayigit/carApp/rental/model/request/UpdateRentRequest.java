@@ -1,3 +1,5 @@
 package com.alenbabayigit.carApp.rental.model.request;
 
-public class UpdateRentRequest {}
+import java.time.LocalDateTime;
+
+public record UpdateRentRequest(Integer customerId, Integer carId, LocalDateTime rentDate, LocalDateTime returnDate) {}
