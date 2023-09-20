@@ -24,13 +24,12 @@ public class Car {
     private String plate;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id", nullable = false)
+    @JoinColumn(nullable = false)
     private Brand brand;
 
     @ManyToOne
-    @JoinColumn(name = "color_id", nullable = false)
+    @JoinColumn(nullable = false)
     private Color color;
-
 
 
 }
