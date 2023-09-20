@@ -1,6 +1,6 @@
 package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.rental.RentalCarServiceImpl;
+import com.alenbabayigit.carApp.rental.RentalCarService;
 import com.alenbabayigit.carApp.rental.model.request.CreateRentRequest;
 import com.alenbabayigit.carApp.rental.model.request.UpdateRentRequest;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("rentalcars")
 public class RentalCarController {
 
-    private final RentalCarServiceImpl rentalCarService;
+    private final RentalCarService rentalCarService;
 
-    public RentalCarController(RentalCarServiceImpl rentalCarService) {
+    public RentalCarController(RentalCarService rentalCarService) {
         this.rentalCarService = rentalCarService;
     }
 
@@ -29,6 +29,17 @@ public class RentalCarController {
     public ResponseEntity<?> getById(@PathVariable Integer id) {
         return rentalCarService.getById(id);
     }
+
+    @GetMapping("getrentalsbycustomer/{customerId}")
+    public ResponseEntity<?> getRentalsByCustomer(@PathVariable Integer customerId) {
+        return rentalCarService.getRentalsByCustomer(customerId);
+    }
+
+    @GetMapping("/getrentalsofcar/{carId}")
+    public ResponseEntity<?> getRentalsOfCar(@PathVariable Integer carId) {
+        return rentalCarService.getRentalsOfCar(carId);
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateRentRequest updateRentRequest) {
