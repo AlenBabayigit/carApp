@@ -1,10 +1,10 @@
 package com.alenbabayigit.carApp.rental;
 
 import com.alenbabayigit.carApp.brand.model.response.BrandGetByIdResponse;
-import com.alenbabayigit.carApp.car.CarServiceImpl;
+import com.alenbabayigit.carApp.car.CarService;
 import com.alenbabayigit.carApp.car.model.response.CarGetByIdResponse;
 import com.alenbabayigit.carApp.color.model.response.ColorGetByIdResponse;
-import com.alenbabayigit.carApp.customer.CustomerServiceImpl;
+import com.alenbabayigit.carApp.customer.CustomerService;
 import com.alenbabayigit.carApp.customer.model.response.CustomerGetByIdResponse;
 import com.alenbabayigit.carApp.exception.BusinessException;
 import com.alenbabayigit.carApp.rental.model.request.CreateRentRequest;
@@ -21,10 +21,10 @@ import org.springframework.stereotype.Service;
 public class RentalCarServiceImpl implements RentalCarService {
 
     private final RentalCarRepository rentalCarRepository;
-    private final CarServiceImpl carService;
-    private final CustomerServiceImpl customerService;
+    private final CarService carService;
+    private final CustomerService customerService;
 
-    public RentalCarServiceImpl(RentalCarRepository rentalCarRepository, CarServiceImpl carService, CustomerServiceImpl customerService) {
+    public RentalCarServiceImpl(RentalCarRepository rentalCarRepository, CarService carService, CustomerService customerService) {
         this.rentalCarRepository = rentalCarRepository;
         this.carService = carService;
         this.customerService = customerService;

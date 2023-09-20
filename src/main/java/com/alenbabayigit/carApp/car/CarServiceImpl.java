@@ -1,12 +1,12 @@
 package com.alenbabayigit.carApp.car;
 
-import com.alenbabayigit.carApp.brand.BrandServiceImpl;
+import com.alenbabayigit.carApp.brand.BrandService;
 import com.alenbabayigit.carApp.brand.model.response.BrandGetByIdResponse;
 import com.alenbabayigit.carApp.car.model.request.CreateCarRequest;
 import com.alenbabayigit.carApp.car.model.request.UpdateCarRequest;
 import com.alenbabayigit.carApp.car.model.response.CarGetAllResponse;
 import com.alenbabayigit.carApp.car.model.response.CarGetByIdResponse;
-import com.alenbabayigit.carApp.color.ColorServiceImpl;
+import com.alenbabayigit.carApp.color.ColorService;
 import com.alenbabayigit.carApp.color.model.response.ColorGetByIdResponse;
 import com.alenbabayigit.carApp.exception.BusinessException;
 import com.alenbabayigit.carApp.util.ResponseBuilder;
@@ -18,10 +18,10 @@ import org.springframework.stereotype.Service;
 public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
-    private final BrandServiceImpl brandService;
-    private final ColorServiceImpl colorService;
+    private final BrandService brandService;
+    private final ColorService colorService;
     
-    public CarServiceImpl(CarRepository carRepository, BrandServiceImpl brandService, ColorServiceImpl colorService) {
+    public CarServiceImpl(CarRepository carRepository, BrandService brandService, ColorService colorService) {
         this.carRepository = carRepository;
         this.brandService = brandService;
         this.colorService = colorService;
