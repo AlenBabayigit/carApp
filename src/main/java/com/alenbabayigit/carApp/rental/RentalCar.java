@@ -18,11 +18,10 @@ public class RentalCar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+
     @OneToOne
     private Customer customer;
 
-    @Column
     @OneToOne
     private Car car;
 
