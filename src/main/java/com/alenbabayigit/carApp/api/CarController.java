@@ -1,6 +1,6 @@
 package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.car.CarServiceImpl;
+import com.alenbabayigit.carApp.car.CarService;
 import com.alenbabayigit.carApp.car.model.request.CreateCarRequest;
 import com.alenbabayigit.carApp.car.model.request.UpdateCarRequest;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/cars")
 public class CarController {
 
-    private final CarServiceImpl carService;
+    private final CarService carService;
 
-    public CarController(CarServiceImpl carService) {
+    public CarController(CarService carService) {
         this.carService = carService;
     }
 

@@ -1,6 +1,6 @@
 package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.color.ColorServiceImpl;
+import com.alenbabayigit.carApp.color.ColorService;
 import com.alenbabayigit.carApp.color.model.request.CreateColorRequest;
 import com.alenbabayigit.carApp.color.model.request.UpdateColorRequest;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/colors")
 public class ColorController {
 
-    private final ColorServiceImpl colorService;
+    private final ColorService colorService;
     
-    public ColorController(ColorServiceImpl colorService) {
+    public ColorController(ColorService colorService) {
         this.colorService = colorService;
     }
 

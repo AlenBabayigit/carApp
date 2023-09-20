@@ -1,6 +1,6 @@
 package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.customer.CustomerServiceImpl;
+import com.alenbabayigit.carApp.customer.CustomerService;
 import com.alenbabayigit.carApp.customer.model.request.CreateCustomerRequest;
 import com.alenbabayigit.carApp.customer.model.request.UpdateCustomerRequest;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/customers")
 public class CustomerController {
 
-    private final CustomerServiceImpl customerService;
+    private final CustomerService customerService;
 
-    public CustomerController(CustomerServiceImpl customerService) {
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 

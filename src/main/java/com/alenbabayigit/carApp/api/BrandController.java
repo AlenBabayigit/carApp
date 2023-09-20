@@ -1,6 +1,6 @@
 package com.alenbabayigit.carApp.api;
 
-import com.alenbabayigit.carApp.brand.BrandServiceImpl;
+import com.alenbabayigit.carApp.brand.BrandService;
 import com.alenbabayigit.carApp.brand.model.request.CreateBrandRequest;
 import com.alenbabayigit.carApp.brand.model.request.UpdateBrandRequest;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/brands")
 public class BrandController {
 
-    private final BrandServiceImpl brandService;
+    private final BrandService brandService;
     
-    public BrandController(BrandServiceImpl brandService) {
+    public BrandController(BrandService brandService) {
         this.brandService = brandService;
     }
 
